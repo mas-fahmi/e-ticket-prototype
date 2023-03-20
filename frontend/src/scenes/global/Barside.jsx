@@ -32,8 +32,6 @@ const Barside = () => {
         "& .pro-menu-item.active": {
           color: "#6870fa !important",
         },
-        display: "flex",
-        height: "100%",
       }}
     >
       <ProSidebar collapsed={isCollapsed}>
