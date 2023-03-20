@@ -4,4 +4,5 @@ module.exports = function(app){
     var jsonOrder = require('./../controllers/OrderController.js');
     app.route('/order').get(jsonOrder.index);
     app.route('/addOrder').post(jsonOrder.addOrder);
+    app.route('/showOrder').get(jsonOrder.showOrder);
 }

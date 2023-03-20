@@ -20,10 +20,10 @@ exports.addOrder = function(req, res){
         return result;
     }
 
-    const {id_ticket = makeid(10), nik, name, address, fest_name, payments} = req.body
+    const {id_ticket = makeid(10), nik, name, address, fest_name, payments, transaction, verification} = req.body
 
-    const sql = `INSERT INTO tb_order (id_ticket, nik, name, address, fest_name, 
-        payments) VALUES ('${id_ticket}', ${nik}, '${name}', '${address}', '${fest_name}', '${payments}')`;
+    const sql = `INSERT INTO tb_order (id_ticket, nik, name, address, fest_name, payments, transaction, verification) 
+    VALUES ('${id_ticket}', ${nik}, '${name}', '${address}', '${fest_name}', '${payments}', '${transaction}', '${verification}')`;
 
     connection.query(sql, (err, fields) => {
         if (err) throw err
