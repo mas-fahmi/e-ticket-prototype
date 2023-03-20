@@ -5,4 +5,5 @@ module.exports = function(app){
     app.route('/order').get(jsonOrder.index);
     app.route('/addOrder').post(jsonOrder.addOrder);
     app.route('/showOrder').get(jsonOrder.showOrder);
+    app.route('/updateOrder/:id_ticket').put(jsonOrder.updateOrder);
 }
