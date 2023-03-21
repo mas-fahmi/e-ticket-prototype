@@ -43,3 +43,24 @@ exports.showOrder = function(req, res){
         response(200, fields, "SUCCESS", res)
     })
 }
+
+exports.updateOrder = function(req, res){
+    const { nik, name, address, fest_name, payments } = req.body;
+    const { id_ticket } = req.params;
+
+    const sql = `UPDATE tb_order SET nik = '${nik}', name = '${name}', address = '${address}', fest_name = '${fest_name}', 
+    payments = '${payments}' WHERE id_ticket = '${id_ticket}'`;
+
+    connection.query(sql, (err, fields) => {
+        if (err) throw err
+        if (fields?.affectedRows) {
+            const data = {
+                isSuccess: fields.affectedRows,
+                message: fields.message,
+            }
+            response(200, data, "Update Data Successfuly", res)
+        } else {
+            response(404, "Unknown Data", "Error", res)
+        }
+    })
+}
