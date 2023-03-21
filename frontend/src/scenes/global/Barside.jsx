@@ -8,6 +8,22 @@ import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import ConfirmationNumberOutlinedIcon from "@mui/icons-material/ConfirmationNumberOutlined";
 import CreditScoreOutlinedIcon from "@mui/icons-material/CreditScoreOutlined";
 
+const Item = ({ title, to, icon, selected, setSelected }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  return (
+    <MenuItem
+      active={selected === title}
+      style={{ color: colors.grey[100] }}
+      onClick={() => setSelected(title)}
+      icon={icon}
+    >
+      <Typography>{title}</Typography>
+      <Link to={to}/>
+    </MenuItem>
+  );
+};
+
 const Barside = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -49,13 +65,73 @@ const Barside = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h5" color={colors.grey[100]}>Dashboard</Typography>
+                <Typography variant="h6" color={colors.grey[100]}>
+                  Dashboard
+                </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <DashboardOutlinedIcon />
                 </IconButton>
               </Box>
             )}
           </MenuItem>
+          {/* USER */}
+          {!isCollapsed && (
+            <Box mb="25px">
+              <Box display="flex" justifyContent="center" alignItems="center">
+                <img
+                  alt="profile-user"
+                  width="90px"
+                  height="90px"
+                  src={`../../assets/logo192.png`}
+                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                />
+              </Box>
+              <Box textAlign="center">
+                <Typography
+                  variant="h6"
+                  color={colors.grey[100]}
+                  fontWeight="bold"
+                  sx={{ m: "10px 0 0 0" }}
+                >
+                  Jony
+                </Typography>
+                <Typography variant="h7" color={colors.greenAccent[500]}>
+                  Admin
+                </Typography>
+              </Box>
+            </Box>
+          )}
+          {/* MENU ITEM */}
+          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <Item
+              title="Dashboard"
+              to="/"
+              icon={<DashboardOutlinedIcon/>}
+              selected={selected}
+              setselected={setSelected}
+            />
+            <Item
+              title="Transaksi"
+              to="/transaksi"
+              icon={<CreditScoreOutlinedIcon/>}
+              selected={selected}
+              setselected={setSelected}
+            />
+            <Item
+              title="Penukaran"
+              to="/"
+              icon={<ConfirmationNumberOutlinedIcon/>}
+              selected={selected}
+              setselected={setSelected}
+            />
+            <Item
+              title="User"
+              to="/"
+              icon={<DashboardOutlinedIcon/>}
+              selected={selected}
+              setselected={setSelected}
+            />
+          </Box>
         </Menu>
       </ProSidebar>
     </Box>

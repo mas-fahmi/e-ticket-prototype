@@ -4,6 +4,9 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Barside";
 import Dashboard from "./scenes/dashboard";
+import Transaksi from "./scenes/transaksi";
+import Penukaran from "./scenes/penukaran";
+import User from "./scenes/user";
 import "./index.css";
 
 function App() {
@@ -19,6 +22,9 @@ function App() {
               <Topbar />
               <Routes>
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/transaksi" element={<Transaksi />} />
+                <Route path="/penukaran" element={<Penukaran />} />
+                <Route path="/user" element={<User />} />
               </Routes>
             </main>
           </div>
