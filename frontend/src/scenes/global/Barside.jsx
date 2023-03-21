@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import 'react-pro-sidebar/dist/css/styles.css';
+import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import ConfirmationNumberOutlinedIcon from "@mui/icons-material/ConfirmationNumberOutlined";
@@ -42,13 +42,16 @@ const Barside = () => {
             icon={isCollapsed ? <DashboardOutlinedIcon /> : undefined}
             style={{ margin: "10px 0 20px 0", color: colors.grey[100] }}
           >
-            {!isCollapsed &&(
-              <Box>
-                <Typography>
-                  ADMIN
-                </Typography>
-                <IconButton>
-                  <DashboardOutlinedIcon/>
+            {!isCollapsed && (
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                ml="15px"
+              >
+                <Typography variant="h5" color={colors.grey[100]}>Dashboard</Typography>
+                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                  <DashboardOutlinedIcon />
                 </IconButton>
               </Box>
             )}
