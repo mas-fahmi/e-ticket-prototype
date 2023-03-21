@@ -19,7 +19,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       icon={icon}
     >
       <Typography>{title}</Typography>
-      <Link to={to}/>
+      <Link to={to} />
     </MenuItem>
   );
 };
@@ -29,6 +29,7 @@ const Barside = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+
 
   return (
     <Box
@@ -106,28 +107,28 @@ const Barside = () => {
             <Item
               title="Dashboard"
               to="/"
-              icon={<DashboardOutlinedIcon/>}
+              icon={<DashboardOutlinedIcon />}
               selected={selected}
               setselected={setSelected}
             />
             <Item
               title="Transaksi"
               to="/transaksi"
-              icon={<CreditScoreOutlinedIcon/>}
+              icon={<CreditScoreOutlinedIcon />}
               selected={selected}
               setselected={setSelected}
             />
             <Item
               title="Penukaran"
-              to="/"
-              icon={<ConfirmationNumberOutlinedIcon/>}
+              to="/penukaran"
+              icon={<ConfirmationNumberOutlinedIcon />}
               selected={selected}
               setselected={setSelected}
             />
             <Item
               title="User"
-              to="/"
-              icon={<DashboardOutlinedIcon/>}
+              to="/User"
+              icon={<DashboardOutlinedIcon />}
               selected={selected}
               setselected={setSelected}
             />
