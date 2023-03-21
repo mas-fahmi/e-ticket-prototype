@@ -20,10 +20,10 @@ exports.addOrder = function(req, res){
         return result;
     }
 
-    const {id_ticket = makeid(10), nik, name, address, fest_name, payments} = req.body
+    const {id_ticket = makeid(10), nik, name, dob, address, fest_name, payments} = req.body
 
-    const sql = `INSERT INTO tb_order (id_ticket, nik, name, address, fest_name, payments) 
-    VALUES ('${id_ticket}', ${nik}, '${name}', '${address}', '${fest_name}', '${payments}')`;
+    const sql = `INSERT INTO tb_order (id_ticket, nik, name, dob, address, fest_name, payments) 
+    VALUES ('${id_ticket}', ${nik}, '${name}', '${dob}', '${address}', '${fest_name}', '${payments}')`;
 
     connection.query(sql, (err, fields) => {
         if (err) throw err
@@ -44,12 +44,21 @@ exports.showOrder = function(req, res){
     })
 }
 
+exports.showOrderId = function(req, res){
+    const { id_ticket } = req.body
+
+    const sql = `SELECT * FROM tb_order WHERE id_ticket = '${id_ticket}'`
+    connection.query(sql, (err, fields) => {
+        response(200, fields, "SUCCESS", res)
+    })
+}
+
 exports.updateOrder = function(req, res){
-    const { nik, name, address, fest_name, payments } = req.body;
+    const { nik, name, dob, address, fest_name, payments, transaction, verification } = req.body;
     const { id_ticket } = req.params;
 
-    const sql = `UPDATE tb_order SET nik = '${nik}', name = '${name}', address = '${address}', fest_name = '${fest_name}', 
-    payments = '${payments}' WHERE id_ticket = '${id_ticket}'`;
+    const sql = `UPDATE tb_order SET nik = '${nik}', name = '${name}', dob = '${dob}', address = '${address}', fest_name = '${fest_name}', 
+    payments = '${payments}', transaction = '${transaction}', verification = '${verification}' WHERE id_ticket = '${id_ticket}'`;
 
     connection.query(sql, (err, fields) => {
         if (err) throw err
@@ -61,6 +70,24 @@ exports.updateOrder = function(req, res){
             response(200, data, "Update Data Successfuly", res)
         } else {
             response(404, "Unknown Data", "Error", res)
+        }
+    })
+}
+
+exports.deleteOrder = function(req, res){
+    const { id_ticket } = req.params;
+
+    const sql = `DELETE FROM tb_order WHERE id_ticket = '${id_ticket}'`
+    connection.query(sql, (err, fields) => {
+        if (err) response(500, "Invalid", "Error", res)
+
+        if (fields?.affectedRows){
+            const data = {
+                isDeleted: fields.affectedRows,
+            }
+            response(200, data, "Deleted Data Successfuly", res)
+        } else {
+            response(404, "Data Not Found", "Error", res)
         }
     })
 }
