@@ -28,7 +28,7 @@ const Barside = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
+  const [selected, setSelected] = useState();
 
 
   return (
@@ -94,7 +94,7 @@ const Barside = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Jony
+                  E-Ticket
                 </Typography>
                 <Typography variant="h7" color={colors.greenAccent[500]}>
                   Admin
@@ -124,14 +124,7 @@ const Barside = () => {
               icon={<ConfirmationNumberOutlinedIcon />}
               selected={selected}
               setselected={setSelected}
-            />
-            <Item
-              title="User"
-              to="/User"
-              icon={<DashboardOutlinedIcon />}
-              selected={selected}
-              setselected={setSelected}
-            />
+            />         
           </Box>
         </Menu>
       </ProSidebar>
