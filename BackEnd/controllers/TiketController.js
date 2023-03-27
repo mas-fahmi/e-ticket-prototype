@@ -25,7 +25,7 @@ exports.addTiket = function(req, res){
 }
 
 exports.showTiket = function(req, res){
-    const sql = 'SELECT * FROM tb_tiket'
+    const sql = 'SELECT * FROM tb_ticket'
     connection.query(sql, (err, fields) => {
         response(200, fields, "SUCCESS", res)
     })
@@ -34,8 +34,47 @@ exports.showTiket = function(req, res){
 exports.showTiketId = function(req, res){
     const { id_ticket } = req.body
 
-    const sql = `SELECT * FROM tb_tiket WHERE id_ticket = '${id_ticket}'`
+    const sql = `SELECT * FROM tb_ticket WHERE id_ticket = '${id_ticket}'`
     connection.query(sql, (err, fields) => {
         response(200, fields, "SUCCESS", res)
+    })
+}
+
+exports.updateTiket = function(req, res){
+    const { nik, name, address, fest_name, payments, verification } = req.body;
+    const { id_ticket } = req.params;
+
+    const sql = `UPDATE tb_ticket SET nik = '${nik}', name = '${name}', address = '${address}', fest_name = '${fest_name}', 
+    payments = '${payments}', verification = '${verification}' WHERE id_ticket = '${id_ticket}'`;
+
+    connection.query(sql, (err, fields) => {
+        if (err) throw err
+        if (fields?.affectedRows) {
+            const data = {
+                isSuccess: fields.affectedRows,
+                message: fields.message,
+            }
+            response(200, data, "Update Data Successfuly", res)
+        } else {
+            response(404, "Unknown Data", "Error", res)
+        }
+    })
+}
+
+exports.deleteTiket = function(req, res){
+    const { id_ticket } = req.params;
+
+    const sql = `DELETE FROM tb_ticket WHERE id_ticket = '${id_ticket}'`
+    connection.query(sql, (err, fields) => {
+        if (err) response(500, "Invalid", "Error", res)
+
+        if (fields?.affectedRows){
+            const data = {
+                isDeleted: fields.affectedRows,
+            }
+            response(200, data, "Deleted Data Successfuly", res)
+        } else {
+            response(404, "Data Not Found", "Error", res)
+        }
     })
 }
