@@ -1,38 +1,66 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { mockDataTeam } from "../../data/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
+import { getData } from "../../store/features/dataSlice";
 
 const Transaksi = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  //getdata
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.data);
+  
+
+  useEffect(() => {
+    dispatch(getData());
+  }, []);
+
   const columns = [
-    { field: "id", headername: "ID" },
+    { field: "id", headerName: "ID" },
     {
-      field: "name",
-      headername: "Name",
+      field: "id_ticket",
+      headername: "id_ticket",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "phone",
-      headername: "Phone Number",
+      field: "nik",
+      headername: "nik",
       flex: 1,
     },
     {
-      field: "email",
-      headername: "Email",
+      field: "name",
+      headername: "name",
+      flex: 1,
+    },
+    {
+      field: "address",
+      headername: "address",
+      flex: 1,
+    },
+    {
+      field: "payments",
+      headername: "payments",
+      flex: 1,
+    },
+    {
+      field: "date",
+      headername: "date",
       flex: 1,
     },
     {
       field: "access",
       headername: "Acces Level",
       flex: 1,
-      headerAlign:"center",
+      headerAlign: "center",
       renderCell: ({ row: { access } }) => {
         return (
           <Box
@@ -60,6 +88,18 @@ const Transaksi = () => {
     },
   ];
 
+  const rows = data.map((item) => ({
+    id: item.id,
+    id_ticket: item.id_ticket,
+    nik: item.nik,
+    name: item.name,
+    address: item.address,
+    payments: item.payments,
+    date: item.date,
+  }));
+
+  console.log(rows, "rows");
+  console.log(data);
   return (
     <Box m="20px">
       <Header title="Transaksi" subtitle="Manage Transaksi" />
@@ -89,7 +129,11 @@ const Transaksi = () => {
           },
         }}
       >
-        <DataGrid rows={mockDataTeam} columns={columns} />
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          getRowId={(rows) => rows.item.id}
+        />
       </Box>
     </Box>
   );
