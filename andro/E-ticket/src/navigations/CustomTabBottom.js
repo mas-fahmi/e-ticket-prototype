@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { GlobalColors, GlobalFontSizes } from '../constants/Styles';
 import { GlobalImages } from '../constants/Images';
 import { GradientView } from '../components';
@@ -11,7 +11,7 @@ const CustomTabBottom = ({ onPress, selected }) => {
         return (
             <TouchableOpacity onPress={onPress} >
                 <GradientView style={styles.container}>
-                    <Icon name='Home' size={GlobalFontSizes[30]} color={GlobalColors.BGCOLOR1} />
+                    <Icon name='home' size={GlobalFontSizes[30]} color={GlobalColors.BGCOLOR1} />
                     {/* <Image source={GlobalImages.IC_TELPRO} style={styles.image} resizeMode='contain' /> */}
                 </GradientView>
             </TouchableOpacity>
@@ -21,7 +21,7 @@ const CustomTabBottom = ({ onPress, selected }) => {
         return (
             <TouchableOpacity onPress={onPress} >
                 <GradientView style={styles.container} colors={["#ffffff", GlobalColors.BUTTON1]}>
-                    <Icon name='ticket' size={GlobalFontSizes[30]} color={GlobalColors.TEXT_PRIMARY} />
+                    <Icon name='home-outline' size={GlobalFontSizes[30]} color={GlobalColors.TEXT_PRIMARY} />
                 </GradientView>
             </TouchableOpacity>
         )
