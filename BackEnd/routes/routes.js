@@ -24,4 +24,6 @@ module.exports = function(app){
     app.route('/addTiket/:id_ticket').post(jsonTiket.addTiket);
     app.route('/showTiket').get(jsonTiket.showTiket);
     app.route('/showTiket/Detail').get(jsonTiket.showTiketId);
+    app.route('/updateTiket/:id_ticket').put(jsonTiket.updateTiket);
+    app.route('/deleteTiket/:id_ticket').delete(jsonTiket.deleteTiket);
 }
