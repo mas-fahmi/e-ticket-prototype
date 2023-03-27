@@ -1,0 +1,58 @@
+{
+  "descriptors": {
+    "DashboardScreen-KxR8mrvLEh39lbmJz0bzO": {
+      "navigation": [Object], 
+      "options": [Object], 
+      "render": [Function render], 
+      "route": [Object]
+    }, 
+    "ScrapScreen-6sHHpCP_sIrmezkmdxRHv": {
+      "navigation": [Object], 
+      "options": [Object], 
+      "render": [Function render], 
+      "route": [Object]
+    }, 
+    "SurveyScreen-_t6RI26vyEH4xIQDEHedq": {
+      "navigation": [Object], 
+      "options": [Object], 
+      "render": [Function render], 
+      "route": [Object]
+    }
+  }, 
+  "insets": {
+    "bottom": 0, 
+    "left": 0, 
+    "right": 0, 
+    "top": 0
+  }, 
+  "navigation": {
+    "addListener": [Function addListener], 
+    "canGoBack": [Function canGoBack], 
+    "dispatch": [Function dispatch], 
+    "emit": [Function anonymous], 
+    "getId": [Function getId], 
+    "getParent": [Function getParent], 
+    "getState": [Function anonymous], 
+    "goBack": [Function anonymous], 
+    "isFocused": [Function isFocused], 
+    "jumpTo": [Function anonymous], 
+    "navigate": [Function anonymous], 
+    "pop": [Function anonymous], 
+    "popToTop": [Function anonymous], 
+    "push": [Function anonymous], 
+    "removeListener": [Function removeListener],
+    "replace": [Function anonymous], 
+    "reset": [Function anonymous], 
+    "setOptions": [Function setOptions], 
+    "setParams": [Function anonymous]
+  }, 
+  "state": {
+    "history": [[Object], [Object]], 
+    "index": 1, 
+    "key": "tab-c6lA5-kupsvvA8Umndmrm", 
+    "routeNames": ["SurveyScreen", "DashboardScreen", "ScrapScreen"], 
+    "routes": [[Object], [Object], [Object]], 
+    "stale": false, 
+    "type": "tab"
+  }
+}
