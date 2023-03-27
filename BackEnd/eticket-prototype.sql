@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2023 at 05:34 AM
+-- Generation Time: Mar 27, 2023 at 06:15 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -35,18 +35,19 @@ CREATE TABLE `tb_booking` (
   `address` varchar(100) NOT NULL,
   `fest_name` varchar(50) NOT NULL,
   `payments` varchar(25) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `verification` enum('Di Bayar','Blm Bayar') NOT NULL DEFAULT 'Blm Bayar'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_booking`
 --
 
-INSERT INTO `tb_booking` (`id`, `id_ticket`, `nik`, `name`, `address`, `fest_name`, `payments`, `date`) VALUES
-(1, '7XeW4WOdtx', '10249129423', 'Gandana', 'Jln. Hiu Terdampar', 'ukaW ukaW', 'Mana', '2023-03-27 02:51:13'),
-(2, 'vjsVLIywkX', '19212940129', 'Jimeh', 'Jln. Harimau Loreng', 'ukaW ukaW', 'Ngutang', '2023-03-27 03:17:13'),
-(3, 'p3ahsJJePh', '10241828519', 'Dins', 'Jln. Harimau Loreng', 'ukaW ukaW', 'Ngutang', '2023-03-27 03:18:48'),
-(4, 'Boc1g217F8', '10241828519', 'Mamans', 'Jln. Gajah Kejepit', 'ukaW ukaW', 'Ngutang', '2023-03-27 03:29:07');
+INSERT INTO `tb_booking` (`id`, `id_ticket`, `nik`, `name`, `address`, `fest_name`, `payments`, `date`, `verification`) VALUES
+(1, '7XeW4WOdtx', '10249129423', 'Gandana', 'Jln. Hiu Terdampar', 'ukaW ukaW', 'Mana', '2023-03-27 02:51:13', ''),
+(2, 'vjsVLIywkX', '19212940129', 'Jimeh', 'Jln. Harimau Loreng', 'ukaW ukaW', 'Ngutang', '2023-03-27 03:17:13', ''),
+(3, 'p3ahsJJePh', '10241828519', 'Dins', 'Jln. Harimau Loreng', 'ukaW ukaW', 'Ngutang', '2023-03-27 03:18:48', ''),
+(4, 'Boc1g217F8', '10241828519', 'Mamans', 'Jln. Gajah Kejepit', 'ukaW ukaW', 'Ngutang', '2023-03-27 03:29:07', '');
 
 -- --------------------------------------------------------
 
@@ -90,18 +91,19 @@ CREATE TABLE `tb_ticket` (
   `name` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
   `fest_name` varchar(50) NOT NULL,
-  `payments` varchar(25) NOT NULL
+  `payments` varchar(25) NOT NULL,
+  `verification` enum('Di Bayar','Belum Bayar') NOT NULL DEFAULT 'Belum Bayar'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_ticket`
 --
 
-INSERT INTO `tb_ticket` (`id`, `id_ticket`, `nik`, `name`, `address`, `fest_name`, `payments`) VALUES
-(1, '7XeW4WOdtx', '10249129423', 'Gandana', 'Jln. Hiu Terdampar', 'ukaW ukaW', 'Mana'),
-(3, 'vjsVLIywkX', '19212940129', 'Jimeh', 'Jln. Harimau Loreng', 'ukaW ukaW', 'Ngutang'),
-(5, 'p3ahsJJePh', '10241828519', 'Dins', 'Jln. Harimau Loreng', 'ukaW ukaW', 'Ngutang'),
-(6, 'Boc1g217F8', '10241828519', 'Mamans', 'Jln. Gajah Kejepit', 'ukaW ukaW', 'Ngutang');
+INSERT INTO `tb_ticket` (`id`, `id_ticket`, `nik`, `name`, `address`, `fest_name`, `payments`, `verification`) VALUES
+(1, '7XeW4WOdtx', '10249129423', 'Gandana', 'Jln. Hiu Terdampar', 'ukaW ukaW', 'Mana', ''),
+(3, 'vjsVLIywkX', '19212940129', 'Jimeh', 'Jln. Harimau Loreng', 'ukaW ukaW', 'Ngutang', ''),
+(5, 'p3ahsJJePh', '10241828519', 'Dins', 'Jln. Harimau Loreng', 'ukaW ukaW', 'Ngutang', ''),
+(6, 'Boc1g217F8', '10241828519', 'Mamans', 'Jln. Gajah Kejepit', 'ukaW ukaW', 'Ngutang', '');
 
 --
 -- Indexes for dumped tables
