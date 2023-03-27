@@ -13,7 +13,13 @@ module.exports = function(app){
     var jsonBooking = require('./../controllers/BookingController.js');
     app.route('/booking').get(jsonBooking.index);
     app.route('/addBooking').post(jsonBooking.addBooking);
-    app.route('/addTiket/:id_ticket').post(jsonBooking.addTiket);
     app.route('/showBooking').get(jsonBooking.showBooking);
     app.route('/showBooking/Detail').get(jsonBooking.showBookingId);
+
+    //Route Tiket
+    var jsonTiket = require('./../controllers/TiketController.js');
+    app.route('/tiket').get(jsonTiket.index);
+    app.route('/addTiket/:id_ticket').post(jsonTiket.addTiket);
+    app.route('/showTiket').get(jsonTiket.showTiket);
+    app.route('/showTiket/Detail').get(jsonTiket.showTiketId);
 }
