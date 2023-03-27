@@ -55,3 +55,19 @@ exports.addTiket = function(req, res){
         }
     })
 }
+
+exports.showBooking = function(req, res){
+    const sql = 'SELECT * FROM tb_booking'
+    connection.query(sql, (err, fields) => {
+        response(200, fields, "SUCCESS", res)
+    })
+}
+
+exports.showBookingId = function(req, res){
+    const { id_ticket } = req.body
+
+    const sql = `SELECT * FROM tb_booking WHERE id_ticket = '${id_ticket}'`
+    connection.query(sql, (err, fields) => {
+        response(200, fields, "SUCCESS", res)
+    })
+}

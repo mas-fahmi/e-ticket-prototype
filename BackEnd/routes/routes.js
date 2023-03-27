@@ -14,4 +14,6 @@ module.exports = function(app){
     app.route('/booking').get(jsonBooking.index);
     app.route('/addBooking').post(jsonBooking.addBooking);
     app.route('/addTiket/:id_ticket').post(jsonBooking.addTiket);
+    app.route('/showBooking').get(jsonBooking.showBooking);
+    app.route('/showBooking/Detail').get(jsonBooking.showBookingId);
 }
