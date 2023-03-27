@@ -15,6 +15,8 @@ module.exports = function(app){
     app.route('/addBooking').post(jsonBooking.addBooking);
     app.route('/showBooking').get(jsonBooking.showBooking);
     app.route('/showBooking/Detail').get(jsonBooking.showBookingId);
+    app.route('/updateBooking/:id_ticket').put(jsonBooking.updateBooking);
+    app.route('/deleteBooking/:id_ticket').delete(jsonBooking.deleteBooking);
 
     //Route Tiket
     var jsonTiket = require('./../controllers/TiketController.js');
