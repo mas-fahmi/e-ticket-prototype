@@ -60,7 +60,7 @@ const Penukaran = () => {
     <Box m="20px">
       <Header title="Penukaran" subtitle="Manage Penukaran" />
       <Box
-        m="40px 0 0 0"
+        m="auto 7% 0 0"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
