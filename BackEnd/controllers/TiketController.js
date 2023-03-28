@@ -13,7 +13,7 @@ exports.addTiket = function(req, res){
                 WHERE id_ticket = '${id_ticket}'`;
 
     connection.query(sql, (err, fields) => {
-        if (err) throw err
+        if (err) response(500, "Invalid", "Error", res)
         if (fields?.affectedRows){
             const data = {
                 isSuccess: fields.affectedRows,
@@ -48,7 +48,7 @@ exports.updateTiket = function(req, res){
     payments = '${payments}', verification = '${verification}' WHERE id_ticket = '${id_ticket}'`;
 
     connection.query(sql, (err, fields) => {
-        if (err) throw err
+        if (err) response(500, "Invalid", "Error", res)
         if (fields?.affectedRows) {
             const data = {
                 isSuccess: fields.affectedRows,

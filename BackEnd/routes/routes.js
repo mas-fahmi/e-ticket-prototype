@@ -17,4 +17,13 @@ module.exports = function(app){
     app.route('/showTiket/Detail').get(jsonTiket.showTiketId);
     app.route('/updateTiket/:id_ticket').put(jsonTiket.updateTiket);
     app.route('/deleteTiket/:id_ticket').delete(jsonTiket.deleteTiket);
+
+    //Route Fest
+    var jsonFest = require('./../controllers/FestController.js');
+    app.route('/fest').get(jsonFest.index);
+    app.route('/addFest').post(jsonFest.addFest);
+    app.route('/showFest').get(jsonFest.showFest);
+    app.route('/updateFest/:id').put(jsonFest.updateFest);
+    app.route('/deleteFest/:id').delete(jsonFest.deleteFest);
+
 }
