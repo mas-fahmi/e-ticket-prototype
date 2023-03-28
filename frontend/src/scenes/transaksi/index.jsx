@@ -1,7 +1,18 @@
-import { Box, Typography, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import {
+  Box,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mockDataTeam } from "../../data/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -14,10 +25,8 @@ const Transaksi = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  //getdata
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.data);
-  
 
   useEffect(() => {
     dispatch(getData());
@@ -27,38 +36,39 @@ const Transaksi = () => {
     { field: "id", headerName: "ID" },
     {
       field: "id_ticket",
-      headername: "id_ticket",
+      headerName: "Id_Ticket",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
       field: "nik",
-      headername: "nik",
+      headerName: "NIK",
       flex: 1,
     },
     {
       field: "name",
-      headername: "name",
+      headerName: "Nama",
       flex: 1,
+      cellClassName: "name-column--cell",
     },
     {
       field: "address",
-      headername: "address",
+      headerName: "Alamat",
       flex: 1,
     },
-    {
-      field: "payments",
-      headername: "payments",
-      flex: 1,
-    },
+    // {
+    //   field: "payments",
+    //   headerName: "Payments",
+    //   flex: 1,
+    // },
     {
       field: "date",
-      headername: "date",
-      flex: 1,
+      headerName: "Date",
+      flex: 2,
     },
     {
       field: "access",
-      headername: "Acces Level",
+      headerName: "Action",
       flex: 1,
       headerAlign: "center",
       renderCell: ({ row: { access } }) => {
@@ -98,8 +108,8 @@ const Transaksi = () => {
     date: item.date,
   }));
 
-  console.log(rows, "rows");
-  console.log(data);
+  // console.log(rows, "rows");
+  // console.log(data, "data");
   return (
     <Box m="20px">
       <Header title="Transaksi" subtitle="Manage Transaksi" />
@@ -127,12 +137,15 @@ const Transaksi = () => {
             borderTop: "none",
             backgroundColor: colors.blueAccent[800],
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+          },
         }}
       >
         <DataGrid
           rows={rows}
           columns={columns}
-          getRowId={(rows) => rows.item.id}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>
