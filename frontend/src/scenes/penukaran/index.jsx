@@ -17,13 +17,6 @@ const Penukaran = () => {
       cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headername: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
-    {
       field: "phone",
       headername: "Phone Number",
       flex: 1,
@@ -31,16 +24,6 @@ const Penukaran = () => {
     {
       field: "email",
       headername: "Email",
-      flex: 1,
-    },
-    {
-      field: "address",
-      headername: "Address",
-      flex: 1,
-    },
-    {
-      field: "city",
-      headername: "City",
       flex: 1,
     },
     {

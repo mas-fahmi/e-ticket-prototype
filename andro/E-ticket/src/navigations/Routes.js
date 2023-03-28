@@ -2,7 +2,7 @@ export default {
     TABSCREEN: 'TabScreen',
     DASHBOARD: 'DashboardScreen',
     LOGIN: 'LoginScreen',
-    MENU: 'MenuScreen',
+    TICKET: 'TicketScreen',
     MAP: 'MapScreen',
     Main: 'MainScreen'
 }

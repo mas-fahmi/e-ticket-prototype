@@ -2,29 +2,17 @@ import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Iconn from 'react-native-vector-icons/Ionicons';
 import { Dashboard } from '../screens';
 import { ROUTES } from './index';
 import { GlobalColors, GlobalWidths } from '../constants/Styles';
 import { CustomTabBottom } from '.'
 import { Svg, Path } from 'react-native-svg';
+import Ticket from '../screens/dashboard/Ticket';
+import Map from '../screens/dashboard/Map';
 
 const Tab = createBottomTabNavigator();
 const svgCenter = (GlobalWidths[100] / 2) - 50
-
-const Menu = () => {
-    return(
-        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-            <Text>this is menu page</Text>
-        </View>
-    )
-}
-const Map = () => {
-    return(
-        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-            <Text>this is Map Page</Text>
-        </View>
-    )
-}
 
 function BottomTabNavigator() {
     return (
@@ -44,8 +32,8 @@ function BottomTabNavigator() {
                 component={Dashboard}
             />
             <Tab.Screen
-                name={ROUTES.MENU}
-                component={Menu}
+                name={ROUTES.TICKET}
+                component={Ticket}
             />
         </Tab.Navigator>
     )
@@ -103,7 +91,7 @@ const IconTabBar = ({ routeName, active, onPress }) => {
     if (routeName === ROUTES.MAP) {
         return (
             <TouchableOpacity onPress={onPress}>
-                <Icon name={active ? "map" : 'map-outline'} size={22} color={iconColors} />
+                <Iconn name={active ? "map" : 'map-outline'} size={22} color={iconColors} />
             </TouchableOpacity>
         )
     }
@@ -112,10 +100,10 @@ const IconTabBar = ({ routeName, active, onPress }) => {
             <CustomTabBottom onPress={onPress} selected={active} />
         )
     }
-    else if (routeName === ROUTES.MENU) {
+    else if (routeName === ROUTES.TICKET) {
         return (
             <TouchableOpacity onPress={onPress}>
-                <Icon name={active ? "ticket" : 'ticket-outline'} size={22} color={iconColors} />
+                <Icon name={active ? "ticket" : 'ticket'} size={22} color={iconColors} />
             </TouchableOpacity>
         )
     }
