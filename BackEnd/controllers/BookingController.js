@@ -20,10 +20,10 @@ exports.addBooking = function(req, res){
         return result;
     }
 
-    const {id_ticket = makeid(10), nik, name, address, fest_name, payments} = req.body
+    const {id_ticket = makeid(10), nik, name, email, fest_name, payments} = req.body
 
-    const sql = `INSERT INTO tb_booking (id_ticket, nik, name, address, fest_name, payments) 
-    VALUES ('${id_ticket}', ${nik}, '${name}', '${address}', '${fest_name}', '${payments}')`;
+    const sql = `INSERT INTO tb_booking (id_ticket, nik, name, email, fest_name, payments) 
+    VALUES ('${id_ticket}', ${nik}, '${name}', '${email}', '${fest_name}', '${payments}')`;
 
     connection.query(sql, (err, fields) => {
         if (err) response(500, "Invalid", "Error", res)
@@ -54,10 +54,10 @@ exports.showBookingId = function(req, res){
 }
 
 exports.updateBooking = function(req, res){
-    const { nik, name, address, fest_name, payments, verification } = req.body;
+    const { nik, name, email, fest_name, payments, verification } = req.body;
     const { id_ticket } = req.params;
 
-    const sql = `UPDATE tb_booking SET nik = '${nik}', name = '${name}', address = '${address}', fest_name = '${fest_name}', 
+    const sql = `UPDATE tb_booking SET nik = '${nik}', name = '${name}', email = '${email}', fest_name = '${fest_name}', 
     payments = '${payments}', verification = '${verification}' WHERE id_ticket = '${id_ticket}'`;
 
     connection.query(sql, (err, fields) => {
