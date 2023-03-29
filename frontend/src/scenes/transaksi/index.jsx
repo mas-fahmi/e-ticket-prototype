@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Paper,
   Table,
   TableBody,
@@ -19,10 +20,13 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import { getData } from "../../store/features/dataSlice";
+import  ModalComponent  from "./Modal";
 
 const Transaksi = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const [isEdit, setIsEdit] = useState(false);
 
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.data);
@@ -87,9 +91,13 @@ const Transaksi = () => {
           >
             {verification === "Di Bayar" && <AdminPanelSettingsOutlinedIcon />}
             {verification === "Blm Bayar" && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+            {/* <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
               {verification}
-            </Typography>
+            </Typography> */}
+            <Button color="inherit" size="small" onClick={() => setIsEdit(true)}>
+              {verification}
+            </Button>
+   
           </Box>
         );
       },
@@ -114,8 +122,9 @@ const Transaksi = () => {
   return (
     <Box m="20px">
       <Header title="Transaksi" subtitle="Manage Transaksi" />
+      
       <Box
-        m="auto 2% 0 auto"
+        m="auto 2% 0 0"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
@@ -149,6 +158,7 @@ const Transaksi = () => {
           components={{ Toolbar: GridToolbar }}
         />
       </Box>
+      {isEdit ? <ModalComponent closeModal={setIsEdit} isEdit={isEdit} /> : null}
     </Box>
   );
 };
