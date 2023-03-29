@@ -3,7 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSelector } from 'react-redux';
 import { BottomTabNavigator } from './index';
 import ROUTES from './Routes';
-import { Login } from '../screens';
+import { Login, Register } from '../screens';
+import Routes from './Routes';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,11 @@ const StackNavigator = () => {
                 }}
             />
             <Stack.Screen name={ROUTES.TABSCREEN} component={BottomTabNavigator}
+                options={{
+                    headerShown: false
+                }}
+            />
+            <Stack.Screen name={Routes.REGISTER} component={Register}
                 options={{
                     headerShown: false
                 }}

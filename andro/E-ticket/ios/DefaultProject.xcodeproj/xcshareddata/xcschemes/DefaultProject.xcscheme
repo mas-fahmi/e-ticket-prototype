@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Laundry.app"
-               BlueprintName = "Laundry"
-               ReferencedContainer = "container:Laundry.xcodeproj">
+               BuildableName = "ETicket.app"
+               BlueprintName = "ETicket"
+               ReferencedContainer = "container:ETicket.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "LaundryTests.xctest"
-               BlueprintName = "LaundryTests"
-               ReferencedContainer = "container:Laundry.xcodeproj">
+               BuildableName = "ETicketTests.xctest"
+               BlueprintName = "ETicketTests"
+               ReferencedContainer = "container:ETicket.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Laundry.app"
-            BlueprintName = "Laundry"
-            ReferencedContainer = "container:Laundry.xcodeproj">
+            BuildableName = "ETicket.app"
+            BlueprintName = "ETicket"
+            ReferencedContainer = "container:ETicket.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Laundry.app"
-            BlueprintName = "Laundry"
-            ReferencedContainer = "container:Laundry.xcodeproj">
+            BuildableName = "ETicket.app"
+            BlueprintName = "ETicket"
+            ReferencedContainer = "container:ETicket.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

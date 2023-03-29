@@ -6,12 +6,11 @@ import { InputText, ButtonText, ModalLoader, ModalInformation } from '../../comp
 import textStyles from '../../constants/TextStyles';
 //Redux
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchLogin } from '../../redux/actions/userAction';
+import { fetchRegister } from '../../redux/actions/userAction';
 import { closeModal } from '../../redux/reducers/alertSlice';
-import { Register } from '../register/register';
 import { ROUTES } from '../../navigations';
 
-export default function FormLogin() {
+export default function FormRegister(){
     const navigation = useNavigation()
     const [isShowPass, setIsShowPass] = useState(true)
     const [userName, setUserName] = useState('')
@@ -21,19 +20,9 @@ export default function FormLogin() {
     const { isInformation, alertMessage } = useSelector(state => state.alert)
     const dispatch = useDispatch()
 
-    const onPressSignIn = () => {
-        dispatch(fetchLogin({ userName, userPass }))
-    }
-
-    useEffect(() => {
-        if (dataProfile !== null) {
-            navigation.navigate(ROUTES.TABSCREEN)
-        } 
-    }, [dataProfile])
-
     return (
         <>
-            <ModalLoader isLoading={isLoading} />
+        <ModalLoader isLoading={isLoading} />
             <Text style={[textStyles.textBold20, { color: GlobalColors.BGCOLOR2 }]}>Login</Text>
             <InputText
                 title='User Name'
@@ -67,13 +56,13 @@ export default function FormLogin() {
             </TouchableOpacity>
             <View style={{ marginTop: 10 }}>
                 <ButtonText onPress={onPressSignIn}>
-                    Sign In
+                    Sign Up
                 </ButtonText>
             </View>
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end' }}>
                 <Text style={[textStyles.textMd12, { color: GlobalColors.TEXT_SECONDARY }]}>Don't have an account? </Text>
-                <TouchableOpacity onPress={() => {}}>
-                    <Text style={[textStyles.textBold12, { color: GlobalColors.BGCOLOR2 }]}>Sign Up</Text>
+                <TouchableOpacity onPress={() => {}} >
+                    <Text style={[textStyles.textBold12, { color: GlobalColors.BGCOLOR2 }]}>Sign in</Text>
                 </TouchableOpacity>
             </View>
             <ModalInformation
