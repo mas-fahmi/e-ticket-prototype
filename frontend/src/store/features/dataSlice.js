@@ -15,6 +15,25 @@ export const getData = createAsyncThunk(
   }
 );
 
+//edit dataa booking
+export const editData = createAsyncThunk(
+  "payload/edit",
+  async (data, thunkAPI) => {
+    const response = await fetch("http://localhost:3001/updateTiket/:id_ticket", {
+      method: "UPDATE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + data.token,
+      },
+      body: JSON.stringify(data.data),
+    });
+    if (response.status === 200) {
+      thunkAPI.dispatch(getData(data));
+    } else {
+    }
+  }
+);
+
 //Get Data Penukaran Tiket
 export const getDataTiket = createAsyncThunk(
   "posts/getData",
@@ -47,6 +66,9 @@ const dataSlice = createSlice({
       state.data = payload[0].payload;
       console.log(payload[0].payload)
       state.isSuccess = false;
+    },
+    [editData.fulfilled]: (state, { payload }) => {
+      state.data = payload;
     },
     [getData.rejected]: (state, { payload }) => {
       state.message = payload;
