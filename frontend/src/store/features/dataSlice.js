@@ -3,10 +3,25 @@ import axios from "axios";
 
 //Get Data Transaksi/Booking
 export const getData = createAsyncThunk(
-  "posts/GetData",
+  "posts/getData",
   async (arg, { rejectWithValue }) => {
     try {
       const { data } = await axios.get("http://localhost:3001/showBooking");
+      // console.log(data);
+      return data;
+    } catch (error) {
+      rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//Get Data Penukaran Tiket
+export const getDataTiket = createAsyncThunk(
+  "posts/getData",
+  async (arg, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get("http://localhost:3001/showTiket");
+      // console.log(data);
       return data;
     } catch (error) {
       rejectWithValue(error.response.data);
@@ -29,11 +44,25 @@ const dataSlice = createSlice({
     },
     [getData.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.data = payload;
-    //   console.log(payload)
+      state.data = payload[0].payload;
+      console.log(payload[0].payload)
       state.isSuccess = false;
     },
     [getData.rejected]: (state, { payload }) => {
+      state.message = payload;
+      state.loading = false;
+      state.isSuccess = false;
+    },
+    [getDataTiket.pending]: (state, { payload }) => {
+      state.loading = true;
+    },
+    [getDataTiket.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.data = payload[0].payload;
+      console.log(payload[0].payload)
+      state.isSuccess = false;
+    },
+    [getDataTiket.rejected]: (state, { payload }) => {
       state.message = payload;
       state.loading = false;
       state.isSuccess = false;
