@@ -1,60 +1,66 @@
 import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
+import { getDataTiket } from "../../store/features/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Penukaran = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.data);
+
+  useEffect(() => {
+    dispatch(getDataTiket());
+  }, []);
+
   const columns = [
     { field: "id", headername: "ID", flex: 0.5 },
-    { field: "registrarId", headername: "Registar ID" },
     {
-      field: "name",
-      headername: "Name",
+      field: "id_ticket",
+      headername: "Id_Ticket",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headername: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
-    {
-      field: "phone",
-      headername: "Phone Number",
+      field: "nik",
+      headername: "Nik",
       flex: 1,
     },
     {
-      field: "email",
-      headername: "Email",
+      field: "name",
+      headername: "Nama",
       flex: 1,
     },
     {
       field: "address",
-      headername: "Address",
+      headername: "Alamat",
       flex: 1,
     },
     {
-      field: "city",
-      headername: "City",
-      flex: 1,
-    },
-    {
-      field: "zipCode",
-      headername: "ZipCode",
+      field: "verification",
+      headername: "Verifikasi",
       flex: 1,
     },
   ];
+
+  const rows = data.map((item) => ({
+    id: item.id,
+    id_ticket: item.id_ticket,
+    nik: item.nik,
+    name: item.name,
+    address: item.address,
+    payments: item.verification,
+  }));
 
   return (
     <Box m="20px">
       <Header title="Penukaran" subtitle="Manage Penukaran" />
       <Box
-        m="40px 0 0 0"
+        m="auto 7% 0 0"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
@@ -83,7 +89,7 @@ const Penukaran = () => {
         }}
       >
         <DataGrid
-          rows={mockDataContacts}
+          rows={rows}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />

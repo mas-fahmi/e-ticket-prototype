@@ -15,11 +15,11 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     <MenuItem
       active={selected === title}
       style={{ color: colors.grey[100] }}
-      onClick={() => setSelected(title)}
+      // onClick={() => setSelected(title)}
       icon={icon}
     >
       <Typography>{title}</Typography>
-      <Link to={to}/>
+      <Link to={to} />
     </MenuItem>
   );
 };
@@ -28,7 +28,8 @@ const Barside = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
+  const [selected, setSelected] = useState();
+
 
   return (
     <Box
@@ -93,7 +94,7 @@ const Barside = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Jony
+                  E-Ticket
                 </Typography>
                 <Typography variant="h7" color={colors.greenAccent[500]}>
                   Admin
@@ -106,31 +107,24 @@ const Barside = () => {
             <Item
               title="Dashboard"
               to="/"
-              icon={<DashboardOutlinedIcon/>}
+              icon={<DashboardOutlinedIcon />}
               selected={selected}
               setselected={setSelected}
             />
             <Item
               title="Transaksi"
               to="/transaksi"
-              icon={<CreditScoreOutlinedIcon/>}
+              icon={<CreditScoreOutlinedIcon />}
               selected={selected}
               setselected={setSelected}
             />
             <Item
               title="Penukaran"
-              to="/"
-              icon={<ConfirmationNumberOutlinedIcon/>}
+              to="/penukaran"
+              icon={<ConfirmationNumberOutlinedIcon />}
               selected={selected}
               setselected={setSelected}
-            />
-            <Item
-              title="User"
-              to="/"
-              icon={<DashboardOutlinedIcon/>}
-              selected={selected}
-              setselected={setSelected}
-            />
+            />         
           </Box>
         </Menu>
       </ProSidebar>
