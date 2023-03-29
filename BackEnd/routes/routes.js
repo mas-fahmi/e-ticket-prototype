@@ -3,7 +3,8 @@ module.exports = function(app){
     //Route Admin
     var jsonAdmin = require('./../controllers/AdminController.js');
     app.route('/admin').get(jsonAdmin.index);
-    app.route('/addAdmin').post(jsonAdmin.addAdmin);
+    app.route('/registerAdmin').post(jsonAdmin.registerAdmin);
+    app.route('/loginAdmin').get(jsonAdmin.loginAdmin);
 
     //Route Booking
     var jsonBooking = require('./../controllers/BookingController.js');

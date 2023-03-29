@@ -13,7 +13,7 @@ exports.addTiket = function(req, res){
                 WHERE id_ticket = '${id_ticket}'`;
 
     connection.query(sql, (err, fields) => {
-        if (err) throw err
+        if (err) response(500, "Invalid", "Error", res)
         if (fields?.affectedRows){
             const data = {
                 isSuccess: fields.affectedRows,
@@ -36,7 +36,11 @@ exports.showTiketId = function(req, res){
 
     const sql = `SELECT * FROM tb_ticket WHERE id_ticket = '${id_ticket}'`
     connection.query(sql, (err, fields) => {
-        response(200, fields, "SUCCESS", res)
+        if (fields.length > 0){
+            response(200, fields, "Success", res)
+        }else{
+            response(404, "Unknown Data", "Error!", res)
+        }
     })
 }
 

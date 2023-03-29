@@ -49,7 +49,11 @@ exports.showBookingId = function(req, res){
 
     const sql = `SELECT * FROM tb_booking WHERE id_ticket = '${id_ticket}'`
     connection.query(sql, (err, fields) => {
-        response(200, fields, "SUCCESS", res)
+        if (fields.length > 0){
+            response(200, fields, "Success", res)
+        }else{
+            response(404, "Unknown Data", "Error!", res)
+        }
     })
 }
 
