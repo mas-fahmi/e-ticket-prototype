@@ -1,10 +1,13 @@
 module.exports = function(app){
 
-    //Route Admin
+    // //Route Admin
     var jsonAdmin = require('./../controllers/AdminController.js');
-    app.route('/admin').get(jsonAdmin.index);
     app.route('/registerAdmin').post(jsonAdmin.registerAdmin);
-    app.route('/loginAdmin').get(jsonAdmin.loginAdmin);
+    app.route('/showAdmin').get(jsonAdmin.getAdmin);
+    app.route('/loginAdmin').post(jsonAdmin.loginAdmin);
+    // app.route('/admin').get(jsonAdmin.index);
+    // app.route('/registerAdmin').post(jsonAdmin.registerAdmin);
+    // app.route('/loginAdmin').get(jsonAdmin.loginAdmin);
 
     //Route Booking
     var jsonBooking = require('./../controllers/BookingController.js');

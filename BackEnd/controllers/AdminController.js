@@ -1,44 +1,66 @@
-var response = require('./../res/response.js');
-var connection = require('./../config/connection.js');
+const Admin = require('./../models/AdminModels.js');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-exports.index = function(req, res){
-    response(200, "API admin rede bous!!", "Ready", res)
-}
-
-exports.registerAdmin = async function(req, res){
-
-    const {name, email, password, confPassword} = req.body
-    if(password != confPassword){
-        return response(400, "Password And Confirm Password Invalid!!", "Error", res);
-    }else {
-        const sql = `INSERT INTO tb_admin (name, email, password) 
-        VALUES ('${name}', '${email}', '${password}')`;
-    
-        connection.query(sql, (err, fields) => {
-            if (err) response(500, "Invalid", "Error", res)
-            if (fields?.affectedRows){
-                const data = {
-                    isSuccess: fields.affectedRows,
-                    id: fields.insertId,
-                }
-                response(200, data, "Register Successfuly!", res)
-            }
-        })
+exports.registerAdmin = async function(req, res) {
+    const { name, email, password, confPassword } = req.body;
+    if (password != confPassword)
+    return res.status(400).json({msg: "Invalid Password And Confirm Password!!"});
+    const salt = await bcrypt.genSalt();
+    const hashPw = await bcrypt.hash(password, salt);
+    try {
+        await Admin.create({
+            name: name,
+            email: email,
+            password: hashPw
+        });
+        res.json({msg: "Register DON!!!"})
+    } catch (error) {
+        console.log(error);
     }
 }
 
-exports.loginAdmin = function(req, res){
+exports.getAdmin = async function(req, res){
+    try {
+        const admin = await Admin.findAll({
+            attributes: ['id', 'name', 'email']
+        });
+        res.json(admin)
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-    const { email, password } = req.body
-    const sql = `SELECT * from tb_admin WHERE email = '${email}' AND password = '${password}'`;
-
-    connection.query(sql, (err, fields) => {
-        if (err) throw err
-        if (fields.length > 0){
-            response(200, fields, "Login Successfuly!", res)
-        }else{
-            response(404, "Wrong email and password", "Error!", res)
-        }
-    })
+exports.loginAdmin = async function(req, res){
+    try {
+        const admin = await Admin.findAll({
+            where:{
+                email: req.body.email
+            }
+        });
+        const match = await bcrypt.compare(req.body.password, admin[0].password);
+        if(!match)
+        return res.status(400).json({msg: "Invalid Password!!"});
+        const adminId = admin[0].id;
+        const name = admin[0].name;
+        const email = admin[0].email;
+        const accesToken = jwt.sign({adminId, name, email}, process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: '25s'
+        });
+        const refreshToken = jwt.sign({adminId, name, email}, process.env.REFRESH_TOKEN_SECRET, {
+            expiresIn: '1d'
+        });
+        await Admin.update({refresh_token: refreshToken}, {
+            where: {
+                id: adminId
+            }
+        });
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000
+        });
+        res.json({accesToken})
+    } catch (error) {
+        return res.json({msg: "Invalid Email!!"})
+    }
 }

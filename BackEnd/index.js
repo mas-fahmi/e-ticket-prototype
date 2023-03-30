@@ -1,9 +1,19 @@
 const express = require('express');
 const cors = require('cors');
+const auth = require('./config/conAuth.js')
 const bodyParser = require('body-parser');
 var routes = require('./routes/routes.js');
+const dotenv = require('dotenv');
+dotenv.config();
 const app = express()
 const port = 3001
+
+try {
+    auth.authenticate();
+    console.log('Auth Connected!!');
+} catch (error) {
+    console.log(error);
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
