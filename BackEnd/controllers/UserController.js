@@ -1,15 +1,15 @@
-const Admin = require('./../models/AdminModels.js');
+const Users = require('./../models/UserModels.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-exports.registerAdmin = async function(req, res) {
+exports.registerUsers = async function(req, res) {
     const { name, email, password, confPassword } = req.body;
     if (password != confPassword)
     return res.status(400).json({msg: "Invalid Password And Confirm Password!!"});
     const salt = await bcrypt.genSalt();
     const hashPw = await bcrypt.hash(password, salt);
     try {
-        await Admin.create({
+        await Users.create({
             name: name,
             email: email,
             password: hashPw
@@ -20,39 +20,39 @@ exports.registerAdmin = async function(req, res) {
     }
 }
 
-exports.getAdmin = async function(req, res){
+exports.getUsers = async function(req, res){
     try {
-        const admin = await Admin.findAll({
+        const user = await Users.findAll({
             attributes: ['id', 'name', 'email']
         });
-        res.json(admin)
+        res.json(user)
     } catch (error) {
         console.log(error);
     }
 }
 
-exports.loginAdmin = async function(req, res){
+exports.loginUsers = async function(req, res){
     try {
-        const admin = await Admin.findAll({
+        const user = await Users.findAll({
             where:{
                 email: req.body.email
             }
         });
-        const match = await bcrypt.compare(req.body.password, admin[0].password);
+        const match = await bcrypt.compare(req.body.password, user[0].password);
         if(!match)
         return res.status(400).json({msg: "Invalid Password!!"});
-        const adminId = admin[0].id;
-        const name = admin[0].name;
-        const email = admin[0].email;
-        const accesToken = jwt.sign({adminId, name, email}, process.env.ACCESS_TOKEN_SECRET, {
+        const userId = user[0].id;
+        const name = user[0].name;
+        const email = user[0].email;
+        const accesToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET, {
             expiresIn: '25s'
         });
-        const refreshToken = jwt.sign({adminId, name, email}, process.env.REFRESH_TOKEN_SECRET, {
+        const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET, {
             expiresIn: '1d'
         });
-        await Admin.update({refresh_token: refreshToken}, {
+        await Users.update({refresh_token: refreshToken}, {
             where: {
-                id: adminId
+                id: userId
             }
         });
         res.cookie('refreshToken', refreshToken, {
@@ -65,19 +65,19 @@ exports.loginAdmin = async function(req, res){
     }
 }
 
-exports.logoutAdmin = async function(req, res){
+exports.logoutUsers = async function(req, res){
     const refreshToken = req.cookies.refreshToken;
     if(!refreshToken) return res.sendStatus(204);
-    const admin = await Admin.findAll({
+    const user = await Users.findAll({
         where: {
             refresh_token: refreshToken
         }
     });
-    if(!admin[0]) return res.sendStatus(204);
-    const adminId = admin[0].id;
-    await Admin.update({refresh_token: null}, {
+    if(!user[0]) return res.sendStatus(204);
+    const userId = user[0].id;
+    await Users.update({refresh_token: null}, {
         where: {
-            id: adminId
+            id: userId
         }
     });
     res.clearCookie('refreshToken');

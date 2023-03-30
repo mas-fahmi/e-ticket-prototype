@@ -6,9 +6,13 @@ module.exports = function(app){
     app.route('/showAdmin').get(jsonAdmin.getAdmin);
     app.route('/loginAdmin').post(jsonAdmin.loginAdmin);
     app.route('/logoutAdmin').delete(jsonAdmin.logoutAdmin);
-    // app.route('/admin').get(jsonAdmin.index);
-    // app.route('/registerAdmin').post(jsonAdmin.registerAdmin);
-    // app.route('/loginAdmin').get(jsonAdmin.loginAdmin);
+
+    // //Route User
+    var jsonUser = require('./../controllers/UserController.js');
+    app.route('/registerUser').post(jsonUser.registerUsers);
+    app.route('/showUser').get(jsonUser.getUsers);
+    app.route('/loginUser').post(jsonUser.loginUsers);
+    app.route('/logoutUser').delete(jsonUser.logoutUsers);
 
     //Route Booking
     var jsonBooking = require('./../controllers/BookingController.js');
