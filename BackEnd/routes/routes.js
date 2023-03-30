@@ -5,6 +5,7 @@ module.exports = function(app){
     app.route('/registerAdmin').post(jsonAdmin.registerAdmin);
     app.route('/showAdmin').get(jsonAdmin.getAdmin);
     app.route('/loginAdmin').post(jsonAdmin.loginAdmin);
+    app.route('/logoutAdmin').delete(jsonAdmin.logoutAdmin);
     // app.route('/admin').get(jsonAdmin.index);
     // app.route('/registerAdmin').post(jsonAdmin.registerAdmin);
     // app.route('/loginAdmin').get(jsonAdmin.loginAdmin);

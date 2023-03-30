@@ -64,3 +64,22 @@ exports.loginAdmin = async function(req, res){
         return res.json({msg: "Invalid Email!!"})
     }
 }
+
+exports.logoutAdmin = async function(req, res){
+    const refreshToken = req.cookies.refreshToken;
+    if(!refreshToken) return res.sendStatus(204);
+    const admin = await Admin.findAll({
+        where: {
+            refresh_token: refreshToken
+        }
+    });
+    if(!admin[0]) return res.sendStatus(204);
+    const adminId = admin[0].id;
+    await Admin.update({refresh_token: null}, {
+        where: {
+            id: adminId
+        }
+    });
+    res.clearCookie('refreshToken');
+    return res.sendStatus(200)
+}
