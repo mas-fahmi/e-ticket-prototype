@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2023 at 06:14 AM
+-- Generation Time: Mar 30, 2023 at 08:33 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_admin`
+--
+
+CREATE TABLE `tb_admin` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `refresh_token` text DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_admin`
+--
+
+INSERT INTO `tb_admin` (`id`, `name`, `email`, `password`, `refresh_token`, `createdAt`, `updatedAt`) VALUES
+(1, 'mamat', 'mamatJago@gmail.com', '$2b$10$u95GnOENF.lJrxuKaxUHs..tgpfS6IuImjBTRGFODfr5aR0OXG9x.', NULL, '2023-03-30 05:43:25', '2023-03-30 06:31:40');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_booking`
 --
 
@@ -32,7 +55,7 @@ CREATE TABLE `tb_booking` (
   `id_ticket` varchar(50) NOT NULL,
   `nik` varchar(25) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `address` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `fest_name` varchar(50) NOT NULL,
   `payments` varchar(25) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -43,12 +66,14 @@ CREATE TABLE `tb_booking` (
 -- Dumping data for table `tb_booking`
 --
 
-INSERT INTO `tb_booking` (`id`, `id_ticket`, `nik`, `name`, `address`, `fest_name`, `payments`, `date`, `verification`) VALUES
-(1, 'yohysuoxAN', '10293151245', 'Timoti', 'Jln. Gajah Kejepit', 'Waku Waku', 'Dana', '2023-03-27 06:51:59', 'Blm Bayar'),
-(2, '0wIt8vWMK2', '91240052851', 'Yayan', 'Jln. Gajah Kejepit', 'Waku Waku', 'Bankir', '2023-03-27 06:52:24', 'Blm Bayar'),
-(3, 'DJSSEbQNla', '1029312542', 'Imeh', 'Jln. Gajah Kejepit', 'Waku Waku', 'Bankir', '2023-03-27 08:48:43', 'Blm Bayar'),
-(4, 'lQukoQSmPl', '12345678912', 'Pirman', 'Jln. Gajah Kejepit', 'Waku Waku', 'Bankir', '2023-03-27 08:49:09', 'Blm Bayar'),
-(5, '3JQRjBXrDR', '1924102951', 'Maman', 'Jln. Gajah Kejepit', 'Waku Waku', 'Dana', '2023-03-27 09:00:47', 'Blm Bayar');
+INSERT INTO `tb_booking` (`id`, `id_ticket`, `nik`, `name`, `email`, `fest_name`, `payments`, `date`, `verification`) VALUES
+(1, '2Bnsroyl2x', '1029125929', 'Bento', 'bento123@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:53:39', 'Blm Bayar'),
+(2, '8nVXwUWjaz', '01295120509', 'mamat', 'mamatnih@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 07:00:54', ''),
+(3, 'EciDYuCvQl', '1295120509', 'Babon', 'Babon468@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:54:29', 'Blm Bayar'),
+(4, 'zmn9XwRUzE', '1295120509', 'Bobon', 'bobon69@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:54:44', 'Blm Bayar'),
+(5, 'nglNUgM000', '1295120509', 'Ratih', 'Ratih00@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:55:27', 'Blm Bayar'),
+(6, 'NYeDS1vULU', '1295120509', 'Kaka', 'kaka0o0@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:55:49', 'Blm Bayar'),
+(7, 'ompbfkxXmw', '1295120509', 'Xanchi', 'xanchi34@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:56:09', 'Blm Bayar');
 
 --
 -- Triggers `tb_booking`
@@ -81,7 +106,7 @@ CREATE TABLE `tb_fest` (
 --
 
 INSERT INTO `tb_fest` (`id`, `fest_name`, `price`, `slot`) VALUES
-(2, 'Waku Waku', 87000, 16);
+(2, 'Waku Waku', 87000, 0);
 
 --
 -- Triggers `tb_fest`
@@ -104,7 +129,7 @@ CREATE TABLE `tb_ticket` (
   `id_ticket` varchar(50) NOT NULL,
   `nik` varchar(25) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `address` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `fest_name` varchar(50) NOT NULL,
   `payments` varchar(25) NOT NULL,
   `verification` enum('Valid','In Valid') NOT NULL DEFAULT 'In Valid'
@@ -114,17 +139,24 @@ CREATE TABLE `tb_ticket` (
 -- Dumping data for table `tb_ticket`
 --
 
-INSERT INTO `tb_ticket` (`id`, `id_ticket`, `nik`, `name`, `address`, `fest_name`, `payments`, `verification`) VALUES
-(1, 'yohysuoxAN', '10293151245', 'Timoti', 'Jln. Gajah Kejepit', 'Waku Waku', 'Dana', 'In Valid'),
-(2, '0wIt8vWMK2', '91240052851', 'Yayan', 'Jln. Gajah Kejepit', 'Waku Waku', 'Bankir', 'In Valid'),
-(3, 'DJSSEbQNla', '1029312542', 'Imeh', 'Jln. Gajah Kejepit', 'Waku Waku', 'Bankir', 'In Valid'),
-(4, 'lQukoQSmPl', '12345678912', 'Pirman', 'Jln. Gajah Kejepit', 'Waku Waku', 'Bankir', 'In Valid'),
-(5, '3JQRjBXrDR', '1924102951', 'Maman', 'Jln. Gajah Kejepit', 'Waku Waku', 'Dana', 'In Valid'),
-(6, '6A5EVZIDKj', '6912312985293', 'Nining', 'Jln. Gajah Kejepit', 'Waku Waku', 'Dana', 'In Valid');
+INSERT INTO `tb_ticket` (`id`, `id_ticket`, `nik`, `name`, `email`, `fest_name`, `payments`, `verification`) VALUES
+(7, '2Bnsroyl2x', '1029125929', 'Bento', 'bento123@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
+(8, '8nVXwUWjaz', '1295120509', 'Gajah', 'Gajah321@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
+(9, 'EciDYuCvQl', '1295120509', 'Babon', 'Babon468@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
+(10, 'zmn9XwRUzE', '1295120509', 'Bobon', 'bobon69@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
+(11, 'nglNUgM000', '1295120509', 'Ratih', 'Ratih00@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
+(12, 'NYeDS1vULU', '1295120509', 'Kaka', 'kaka0o0@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
+(13, 'ompbfkxXmw', '1295120509', 'Xanchi', 'xanchi34@gmail.com', 'Waku Waku', 'Dana', 'In Valid');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tb_admin`
+--
+ALTER TABLE `tb_admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tb_booking`
@@ -153,10 +185,16 @@ ALTER TABLE `tb_ticket`
 --
 
 --
+-- AUTO_INCREMENT for table `tb_admin`
+--
+ALTER TABLE `tb_admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tb_booking`
 --
 ALTER TABLE `tb_booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_fest`
@@ -168,7 +206,7 @@ ALTER TABLE `tb_fest`
 -- AUTO_INCREMENT for table `tb_ticket`
 --
 ALTER TABLE `tb_ticket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
