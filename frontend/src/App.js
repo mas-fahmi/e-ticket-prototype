@@ -8,6 +8,7 @@ import Transaksi from "./scenes/transaksi";
 import Penukaran from "./scenes/penukaran";
 import User from "./scenes/user";
 import "./index.css";
+import Login from "./components/Login";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -21,7 +22,8 @@ function App() {
             <main className="content">
               <Topbar />
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route exact path="/" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/transaksi" element={<Transaksi />} />
                 <Route path="/penukaran" element={<Penukaran />} />
                 <Route path="/user" element={<User />} />
