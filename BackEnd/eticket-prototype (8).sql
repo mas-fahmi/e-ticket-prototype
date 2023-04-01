@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2023 at 04:46 PM
+-- Generation Time: Apr 01, 2023 at 05:00 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -59,7 +59,7 @@ CREATE TABLE `tb_booking` (
   `fest_name` varchar(50) NOT NULL,
   `payments` varchar(25) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `verification` enum('Di Bayar','Blm Bayar') NOT NULL DEFAULT 'Blm Bayar'
+  `verification` enum('di bayar','blm bayar') NOT NULL DEFAULT 'blm bayar'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -67,12 +67,12 @@ CREATE TABLE `tb_booking` (
 --
 
 INSERT INTO `tb_booking` (`id`, `id_ticket`, `nik`, `name`, `email`, `fest_name`, `payments`, `date`, `verification`) VALUES
-(1, '2Bnsroyl2x', '1029125929', 'Bento', 'bento123@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:53:39', 'Blm Bayar'),
+(1, '2Bnsroyl2x', '1029125929', 'Bento', 'bento123@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:53:39', 'blm bayar'),
 (2, '8nVXwUWjaz', '01295120509', 'mamat', 'mamatnih@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 07:00:54', ''),
-(3, 'EciDYuCvQl', '1295120509', 'Babon', 'Babon468@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:54:29', 'Blm Bayar'),
-(4, 'zmn9XwRUzE', '1295120509', 'Bobon', 'bobon69@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:54:44', 'Blm Bayar'),
-(5, 'nglNUgM000', '1295120509', 'Ratih', 'Ratih00@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:55:27', 'Blm Bayar'),
-(6, 'NYeDS1vULU', '1295120509', 'Kaka', 'kaka0o0@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:55:49', 'Blm Bayar');
+(3, 'EciDYuCvQl', '1295120509', 'Babon', 'Babon468@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:54:29', 'blm bayar'),
+(4, 'zmn9XwRUzE', '1295120509', 'Bobon', 'bobon69@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:54:44', 'blm bayar'),
+(5, 'nglNUgM000', '1295120509', 'Ratih', 'Ratih00@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:55:27', 'blm bayar'),
+(6, 'NYeDS1vULU', '1295120509', 'Kaka', 'kaka0o0@gmail.com', 'Waku Waku', 'Dana', '2023-03-29 03:55:49', 'blm bayar');
 
 --
 -- Triggers `tb_booking`
@@ -131,7 +131,7 @@ CREATE TABLE `tb_ticket` (
   `email` varchar(255) NOT NULL,
   `fest_name` varchar(50) NOT NULL,
   `payments` varchar(25) NOT NULL,
-  `verification` enum('Valid','In Valid') NOT NULL DEFAULT 'In Valid'
+  `verification` enum('valid','in valid') NOT NULL DEFAULT 'in valid'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -139,13 +139,13 @@ CREATE TABLE `tb_ticket` (
 --
 
 INSERT INTO `tb_ticket` (`id`, `id_ticket`, `nik`, `name`, `email`, `fest_name`, `payments`, `verification`) VALUES
-(7, '2Bnsroyl2x', '1029125929', 'Bento', 'bento123@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
-(8, '8nVXwUWjaz', '1295120509', 'Gajah', 'Gajah321@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
-(9, 'EciDYuCvQl', '1295120509', 'Babon', 'Babon468@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
-(10, 'zmn9XwRUzE', '1295120509', 'Bobon', 'bobon69@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
-(11, 'nglNUgM000', '1295120509', 'Ratih', 'Ratih00@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
-(12, 'NYeDS1vULU', '1295120509', 'Kaka', 'kaka0o0@gmail.com', 'Waku Waku', 'Dana', 'In Valid'),
-(13, 'ompbfkxXmw', '1295120509', 'Xanchi', 'xanchi34@gmail.com', 'Waku Waku', 'Dana', 'In Valid');
+(7, '2Bnsroyl2x', '1029125929', 'Bento', 'bento123@gmail.com', 'Waku Waku', 'Dana', 'in valid'),
+(8, '8nVXwUWjaz', '1295120509', 'Gajah', 'Gajah321@gmail.com', 'Waku Waku', 'Dana', 'in valid'),
+(9, 'EciDYuCvQl', '1295120509', 'Babon', 'Babon468@gmail.com', 'Waku Waku', 'Dana', 'in valid'),
+(10, 'zmn9XwRUzE', '1295120509', 'Bobon', 'bobon69@gmail.com', 'Waku Waku', 'Dana', 'in valid'),
+(11, 'nglNUgM000', '1295120509', 'Ratih', 'Ratih00@gmail.com', 'Waku Waku', 'Dana', 'in valid'),
+(12, 'NYeDS1vULU', '1295120509', 'Kaka', 'kaka0o0@gmail.com', 'Waku Waku', 'Dana', 'in valid'),
+(13, 'ompbfkxXmw', '1295120509', 'Xanchi', 'xanchi34@gmail.com', 'Waku Waku', 'Dana', 'in valid');
 
 -- --------------------------------------------------------
 
@@ -249,7 +249,7 @@ DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `auto_delete` ON SCHEDULE EVERY 1 SECOND STARTS '2023-04-01 21:40:03' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM tb_booking WHERE date < DATE_SUB(NOW(), INTERVAL 7 HOUR)$$
+CREATE DEFINER=`root`@`localhost` EVENT `auto_delete` ON SCHEDULE EVERY 1 SECOND STARTS '2023-04-01 21:40:03' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM tb_booking WHERE verification = "blm bayar" AND date < DATE_SUB(NOW(), INTERVAL 7 HOUR)$$
 
 DELIMITER ;
 COMMIT;

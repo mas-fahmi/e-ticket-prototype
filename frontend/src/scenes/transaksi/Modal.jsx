@@ -24,7 +24,7 @@ const style = {
 
 const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
   const [open, setOpen] = React.useState(isEdit);
-  const [email, setEmail] = useState("");
+  const [verification, setVerification] = useState("");
   //   const handleOpen = () => setOpen(isEdit);
   const handleClose = () => closeModal(false);
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
     event.preventDefault();
     let dataval = row;
     param.data = dataval;
-    param.data.email = email;
+    param.data.verification = verification;
     dispatch(editData(param));
   };
 
@@ -58,8 +58,8 @@ const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
             </Typography>
             <TextField
               label="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={verification}
+              onChange={(e) => setVerification(e.target.value)}
               margin="normal"
               variant="filled"
               color="info"
@@ -67,8 +67,7 @@ const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
             />
           </div>
           <div className="footer">
-            <Button color="success" onClick={handleSave}>Telah Bayar</Button>
-            <Button color="error">Cancel verification</Button>
+            <Button color="success"  onClick={handleSave}>Telah Bayar</Button>
           </div>
         </Box>
       </Modal>
