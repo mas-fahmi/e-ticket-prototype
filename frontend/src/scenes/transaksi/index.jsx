@@ -1,14 +1,6 @@
 import {
   Box,
   Button,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
   useTheme,
 } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -17,7 +9,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import { getData } from "../../store/features/dataSlice";
 import  ModalComponent  from "./Modal";
@@ -158,7 +149,7 @@ const Transaksi = () => {
           components={{ Toolbar: GridToolbar }}
         />
       </Box>
-      {isEdit ? <ModalComponent closeModal={setIsEdit} isEdit={isEdit} /> : null}
+      {isEdit ? <ModalComponent closeModal={setIsEdit} isEdit={isEdit}/> : null}
     </Box>
   );
 };

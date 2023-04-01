@@ -1,8 +1,9 @@
 import { Button, TextField, Typography, Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import "./transaksi.css"
+import { useDispatch } from "react-redux";
+import { editData } from "../../store/features/dataSlice";
+import "./transaksi.css";
 
 const style = {
   position: "absolute",
@@ -19,11 +20,26 @@ const style = {
   pb: 3,
 };
 
+
+
 const ModalComponent = ({ isEdit = false, id, closeModal }) => {
   const [open, setOpen] = React.useState(isEdit);
+  const [name, setName] = useState("");
   //   const handleOpen = () => setOpen(isEdit);
   const handleClose = () => closeModal(false);
   const dispatch = useDispatch();
+  
+  const param = {};
+  const handleSave = async (event) => {
+    event.preventDefault();
+    let dataval = {
+      id: id,
+      name: name,
+    };
+    param.data = dataval;
+    dispatch(editData(param));
+  };
+
   return (
     <div>
       <Modal
@@ -42,9 +58,18 @@ const ModalComponent = ({ isEdit = false, id, closeModal }) => {
             <Typography color="light" align="justify">
               Verifikasi pembayaran berdasarkan data dari bukti transaksi.
             </Typography>
+            <TextField
+              label="Email"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              margin="normal"
+              variant="filled"
+              color="info"
+              focused
+            />
           </div>
           <div className="footer">
-            <Button color="success">Telah Bayar</Button>
+            <Button color="success" onClick={handleSave}>Telah Bayar</Button>
             <Button color="error">Cancel verification</Button>
           </div>
         </Box>
@@ -53,7 +78,7 @@ const ModalComponent = ({ isEdit = false, id, closeModal }) => {
     // <Modal
     //     open={openModal}
     //     onClose={handleClose}
-    // >
+    // 
     //     <Box sx={style}>
 
     //     </Box>
