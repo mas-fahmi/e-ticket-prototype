@@ -20,11 +20,12 @@ export const GlobalColors = {
     TEXT_TERTIARY: "#000000",
     BGCOLOR1: "#F8FAFD",
     BGCOLOR2: "#e42313",
-    BGCOLOR3: "#690000",
+    BGCOLOR3: "#131432",
     BUTTON1: "#46C6E9",
     BUTTON2: "#FF5B7F",
     OPENCOLOR: "#66FB4E",
-    ONPROGRESSCOLOR: "#FFA132"
+    ONPROGRESSCOLOR: "#FFA132",
+    border: "#242B45",
 }
 export const GlobalWidths = {
     2: Math.round(widthDevice * 0.025),

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { GlobalColors, GlobalFont, GlobalFontSizes } from './Styles';
 
-const colorText = GlobalColors.TEXT_SECONDARY
+const colorText = GlobalColors.TEXT_PRIMARY
 const reguler = GlobalFont.Gotham.reguler
 const medium = GlobalFont.Gotham.medium
 const mediumItalic = GlobalFont.Gotham.mdItalic
@@ -40,7 +40,7 @@ const textStyles = StyleSheet.create({
     textMd11: { fontSize: GlobalFontSizes[11], fontFamily: medium, color: colorText },
     textMd12: { fontSize: GlobalFontSizes[12], fontFamily: medium, color: colorText },
     textMd13: { fontSize: GlobalFontSizes[13], fontFamily: medium, color: colorText },
-    textMd14: { fontSize: GlobalFontSizes[14], fontFamily: medium, color: colorText },
+    textMd14: { fontSize: GlobalFontSizes[14], fontFamily: medium, color: '#ffffff' },
     textMd15: { fontSize: GlobalFontSizes[15], fontFamily: medium, color: colorText },
     textMd16: { fontSize: GlobalFontSizes[16], fontFamily: medium, color: colorText },
     textMd17: { fontSize: GlobalFontSizes[17], fontFamily: medium, color: colorText },
@@ -63,7 +63,7 @@ const textStyles = StyleSheet.create({
     textBold9: { fontSize: GlobalFontSizes[9], fontFamily: bold, color: colorText },
     textBold10: { fontSize: GlobalFontSizes[10], fontFamily: bold, color: colorText },
     textBold11: { fontSize: GlobalFontSizes[11], fontFamily: bold, color: colorText },
-    textBold12: { fontSize: GlobalFontSizes[12], fontFamily: bold, color: colorText },
+    textBold12: { fontSize: GlobalFontSizes[12], fontFamily: bold, color: '#FA6E43' },
     textBold13: { fontSize: GlobalFontSizes[13], fontFamily: bold, color: colorText },
     textBold14: { fontSize: GlobalFontSizes[14], fontFamily: bold, color: colorText },
     textBold15: { fontSize: GlobalFontSizes[15], fontFamily: bold, color: colorText },

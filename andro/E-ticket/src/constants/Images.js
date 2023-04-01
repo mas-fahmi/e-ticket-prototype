@@ -6,5 +6,8 @@ export const GlobalImages = {
     IMG2: require("../../assets/images/image2.jpg"),
     IMG3: require("../../assets/images/image3.jpg"),
     IMG4: require("../../assets/images/image4.jpg"),
+    taylorFest: require("../../assets/images/taylorFest.png"),
+    wakuFest: require("../../assets/images/wakuwaku.jpg"),
+    PostCard1: require("../../assets/images/postCard1.jpg"),
     ticket_logo: require("../../assets/images/ticket.png"),
 }

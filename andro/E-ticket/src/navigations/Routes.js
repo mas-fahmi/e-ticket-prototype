@@ -5,5 +5,6 @@ export default {
     REGISTER: 'RegisterScreen',
     TICKET: 'TicketScreen',
     MAP: 'MapScreen',
-    Main: 'MainScreen'
+    DETAILPOST: 'DPostScreen',
+    BOOKING: 'BookingScreen'
 }

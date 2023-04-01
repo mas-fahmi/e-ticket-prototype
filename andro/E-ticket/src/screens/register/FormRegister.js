@@ -1,76 +1,70 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View, StatusBar , StyleSheet, Button} from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { GlobalColors } from '../../constants/Styles';
-import { InputText, ButtonText, ModalLoader, ModalInformation } from '../../components';
+import axios from 'axios';
 import textStyles from '../../constants/TextStyles';
+import { GlobalColors } from '../../constants/Styles';
+import { ModalLoader } from '../../components';
 //Redux
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchRegister } from '../../redux/actions/userAction';
-import { closeModal } from '../../redux/reducers/alertSlice';
+import { useDispatch, useSelector } from 'react-redux';
+//Navigation
+import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../navigations';
+import { TextInput } from 'react-native-gesture-handler';
 
-export default function FormRegister(){
+export default function FormRegister() {
+
     const navigation = useNavigation()
-    const [isShowPass, setIsShowPass] = useState(true)
-    const [userName, setUserName] = useState('')
-    const [userPass, setUserPass] = useState('')
-
     const { isLoading, dataProfile } = useSelector(state => state.user)
-    const { isInformation, alertMessage } = useSelector(state => state.alert)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch()   
 
+    useEffect(() => {
+        if (dataProfile !== null) {
+            navigation.navigate(ROUTES.LOGIN)
+        } 
+    }, [dataProfile])
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confPassword, setconfPassword] = useState("")
+
+    const submit = () => {
+        const data = {
+            name,
+            email,
+            password,
+            confPassword
+        }
+        axios.post('http://10.0.2.2:3001/registerUser', data)
+        .then(res => {
+            console.log('res : ', res);
+            setName("");
+            setEmail("");
+            setPassword("");
+            setconfPassword("");
+        })
+    }
     return (
         <>
-        <ModalLoader isLoading={isLoading} />
-            <Text style={[textStyles.textBold20, { color: GlobalColors.BGCOLOR2 }]}>Login</Text>
-            <InputText
-                title='User Name'
-                textInputConfig={{
-                    placeholder: 'Enter your user name',
-                    value: userName,
-                    onChangeText: (text) => setUserName(text),
-                    returnKeyType: "next",
-                    onSubmitEditing: () => this.passwordInput.focus()
-                }}
-            />
-            <InputText
-                title='Password'
-                rightIcon={isShowPass ? 'eye' : 'eye-off'}
-                onPressIcon={() => setIsShowPass(!isShowPass)}
-                textInputConfig={{
-                    placeholder: 'Enter your password',
-                    secureTextEntry: isShowPass,
-                    value: userPass,
-                    onChangeText: (text) => setUserPass(text),
-                    returnKeyType: "go",
-                    onSubmitEditing: onPressSignIn,
-                    ref: (input) => (this.passwordInput = input)
-                }}
-            />
-            <TouchableOpacity
-                style={{ marginTop: 10, alignItems: 'flex-end' }}
-                onPress={() => { }}
-            >
-                <Text style={[textStyles.textMd12, { color: GlobalColors.BGCOLOR2  }]}>Forgot Password?</Text>
-            </TouchableOpacity>
-            <View style={{ marginTop: 10 }}>
-                <ButtonText onPress={onPressSignIn}>
-                    Sign Up
-                </ButtonText>
-            </View>
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end' }}>
-                <Text style={[textStyles.textMd12, { color: GlobalColors.TEXT_SECONDARY }]}>Don't have an account? </Text>
-                <TouchableOpacity onPress={() => {}} >
-                    <Text style={[textStyles.textBold12, { color: GlobalColors.BGCOLOR2 }]}>Sign in</Text>
-                </TouchableOpacity>
-            </View>
-            <ModalInformation
-                showModal={isInformation}
-                message={alertMessage}
-                onPressSubmitOk={() => dispatch(closeModal("Information"))}
-                onRequestClose={() => dispatch(closeModal("Information"))}
-            />
+            <ModalLoader isLoading={isLoading} />
+            <StatusBar hidden={true} />
+            <Text style={[textStyles.textBold20, { color: GlobalColors.BGCOLOR2 }]}>Register</Text>
+            
+            <View style={styles.container}>
+                    <Text style={{color: 'white'}}>Masukan Data User</Text>
+                    <TextInput placeholder='Name'  style={styles.input} value={name} onChangeText={(value) => setName(value)}/>
+                    <TextInput placeholder='Email'  style={styles.input} value={email} onChangeText={(value) => setEmail(value)}/>
+                    <TextInput placeholder='password'  style={styles.input} value={password} onChangeText={(value) => setPassword(value)}/>
+                    <TextInput placeholder='Confirm password'  style={styles.input} value={confPassword} onChangeText={(value) => setconfPassword(value)}/>
+                    <Button title='Simpan' onPress={submit}/>
+                </View>
         </>
+            
     )
 }
+
+const styles = StyleSheet.create({
+    container: {padding: 20, },
+    input: {borderWidth: 1,marginBottom: 12, borderRadius:25, paddingHorizontal: 18, color: 'white', borderColor: 'white'},
+
+})
