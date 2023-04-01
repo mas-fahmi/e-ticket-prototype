@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2023 at 04:41 PM
+-- Generation Time: Apr 01, 2023 at 04:46 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -249,7 +249,7 @@ DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `auto_delete` ON SCHEDULE EVERY 1 SECOND STARTS '2023-04-01 21:40:03' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM tb_booking WHERE date < DATE_SUB(NOW(), INTERVAL 1 MINUTE)$$
+CREATE DEFINER=`root`@`localhost` EVENT `auto_delete` ON SCHEDULE EVERY 1 SECOND STARTS '2023-04-01 21:40:03' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM tb_booking WHERE date < DATE_SUB(NOW(), INTERVAL 7 HOUR)$$
 
 DELIMITER ;
 COMMIT;
