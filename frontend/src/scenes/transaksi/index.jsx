@@ -4,6 +4,8 @@ import {
   Button,
   createTheme,
   Grid,
+  IconButton,
+  InputBase,
   Paper,
   Table,
   TableBody,
@@ -26,19 +28,20 @@ import Header from "../../components/Header";
 import { getData } from "../../store/features/dataSlice";
 import ModalComponent from "./Modal";
 import DataTable from "react-data-table-component";
+import SearchIcon from "@mui/icons-material/Search";
 // const Transaksi = () => {
 //   const theme = useTheme();
 //   const colors = tokens(theme.palette.mode);
 //   const [id, setId] = useState(null);
-// const [isEdit, setIsEdit] = useState(false);
-// const [row, setRow] = useState();
+//   const [isEdit, setIsEdit] = useState(false);
+//   const [row, setRow] = useState();
 
-// const dispatch = useDispatch();
-// const { data } = useSelector((state) => state.data);
+//   const dispatch = useDispatch();
+//   const { data } = useSelector((state) => state.data);
 
-// useEffect(() => {
-//   dispatch(getData());
-// }, []);
+//   useEffect(() => {
+//     dispatch(getData());
+//   }, []);
 
 //   const columns = [
 //     { field: "id", headerName: "No" },
@@ -94,7 +97,9 @@ import DataTable from "react-data-table-component";
 //             }
 //             borderRadius="4px"
 //           >
-//             {action.verification === "Di Bayar" && <AdminPanelSettingsOutlinedIcon />}
+//             {action.verification === "Di Bayar" && (
+//               <AdminPanelSettingsOutlinedIcon />
+//             )}
 //             {action.verification === "Blm Bayar" && <LockOpenOutlinedIcon />}
 //             {/* <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
 //               {verification}
@@ -103,9 +108,9 @@ import DataTable from "react-data-table-component";
 //               color="inherit"
 //               size="small"
 //               onClick={() => {
-// setIsEdit(true);
-// setRow(action)
-// setId(action.id_ticket);
+//                 setIsEdit(true);
+//                 setRow(row);
+//                 setId(action.id_ticket);
 //               }}
 //             >
 //               {action.verification}
@@ -171,7 +176,7 @@ import DataTable from "react-data-table-component";
 //         />
 //       </Box>
 //       {isEdit ? (
-//         <ModalComponent closeModal={setIsEdit} isEdit={isEdit} row={row}/>
+//         <ModalComponent closeModal={setIsEdit} isEdit={isEdit} row={row} />
 //       ) : null}
 //     </Box>
 //   );
@@ -182,13 +187,19 @@ import DataTable from "react-data-table-component";
 const Transaksi = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.data);
-
   const [isEdit, setIsEdit] = useState(false);
   const [row, setRow] = useState();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     dispatch(getData());
   }, []);
 
+  useEffect(() => {
+
+  }, [search])
   const columns = [
     {
       name: "Id",
@@ -197,6 +208,9 @@ const Transaksi = () => {
     {
       name: "Id_Ticket",
       selector: (row) => row.id_ticket,
+      style: {
+        color: colors.greenAccent[300],
+      },
     },
     {
       name: "nik",
@@ -205,6 +219,9 @@ const Transaksi = () => {
     {
       name: "nama",
       selector: (row) => row.name,
+      style: {
+        color: colors.greenAccent[300],
+      },
     },
     {
       name: "Email",
@@ -213,6 +230,9 @@ const Transaksi = () => {
     {
       name: "Payments",
       selector: (row) => row.payments,
+      style: {
+        color: colors.greenAccent[300],
+      },
     },
     {
       name: "Date",
@@ -221,16 +241,20 @@ const Transaksi = () => {
     {
       name: "Verification",
       selector: (row) => row.verification,
+      sortable: true,
     },
     {
       name: "Action",
       cell: (row) => (
         <Button
+          color="info"
           onClick={() => {
             setIsEdit(true);
             setRow(row);
           }}
-        >EDit</Button>
+        >
+          EDit
+        </Button>
       ),
     },
   ];
@@ -249,14 +273,69 @@ const Transaksi = () => {
     };
   });
 
+  const customStyle = {
+    rows: {
+      style: {
+        // fontSize: "10px",
+        fontWeight: "bold",
+        backgroundColor: colors.primary[500],
+      },
+    },
+    headCells: {
+      style: {
+        fontSize: "15px",
+        fontWeight: "bold",
+        backgroundColor: colors.blueAccent[800],
+        padding: "5px",
+      },
+    },
+    pagination: {
+      style: {
+        backgroundColor: colors.blueAccent[800],
+      },
+    },
+  };
+  const [records, setRecords] = useState(datas)
+  function handleFilter(event) {
+    const newData = records.filter(row => {
+      return row.name.toLowerCase().includes(event.target.value.toLowerCase())
+    })
+    setRecords(newData)
+  }
   return (
-    <div>
-      <h2>asdasasdsa</h2>
-      <DataTable columns={columns} data={datas}></DataTable>
+    <Box m="20px">
+      <Header title="Transaksi" subtitle="Manage Transaksi" />
+      <Box display="flex" justifyContent="flex-end" margin="auto">
+        <Box
+          display="flex"
+          backgroundcolor={colors.primary[400]}
+          borderRadius="3px"
+        >
+          <InputBase
+            sx={{ ml: 2, flex: 1 }}
+            placeholder="Search"
+            onChange={handleFilter}
+          />
+          <IconButton type="button" sx={{ p: 1 }}>
+            <SearchIcon />
+          </IconButton>
+        </Box>
+      </Box>
+      <DataTable
+        columns={columns}
+        data={records}
+        pagination
+        highlightOnHover
+        pointerOnHover
+        fixedHeader
+        fixedHeaderScrollHeight="400px"
+        theme={2 === 1 ? "dark" : "dark"}
+        customStyles={customStyle}
+      ></DataTable>
       {isEdit ? (
-        <ModalComponent closeModal={setIsEdit} isEdit={isEdit} row={row}/>
+        <ModalComponent closeModal={setIsEdit} isEdit={isEdit} row={row} />
       ) : null}
-    </div>
+    </Box>
   );
 };
 
