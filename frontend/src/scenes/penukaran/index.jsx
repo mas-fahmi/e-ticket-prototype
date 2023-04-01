@@ -36,8 +36,8 @@ const Penukaran = () => {
       flex: 1,
     },
     {
-      field: "address",
-      headername: "Alamat",
+      field: "email",
+      headername: "Email",
       flex: 1,
     },
     {
@@ -52,7 +52,7 @@ const Penukaran = () => {
     id_ticket: item.id_ticket,
     nik: item.nik,
     name: item.name,
-    address: item.address,
+    email: item.email,
     payments: item.verification,
   }));
 

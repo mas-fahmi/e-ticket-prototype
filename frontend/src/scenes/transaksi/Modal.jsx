@@ -22,21 +22,19 @@ const style = {
 
 
 
-const ModalComponent = ({ isEdit = false, id, closeModal }) => {
+const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
   const [open, setOpen] = React.useState(isEdit);
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   //   const handleOpen = () => setOpen(isEdit);
   const handleClose = () => closeModal(false);
   const dispatch = useDispatch();
-  
+  console.log(row)
   const param = {};
   const handleSave = async (event) => {
     event.preventDefault();
-    let dataval = {
-      id: id,
-      name: name,
-    };
+    let dataval = row;
     param.data = dataval;
+    param.data.email = email;
     dispatch(editData(param));
   };
 
@@ -60,8 +58,8 @@ const ModalComponent = ({ isEdit = false, id, closeModal }) => {
             </Typography>
             <TextField
               label="Email"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               margin="normal"
               variant="filled"
               color="info"

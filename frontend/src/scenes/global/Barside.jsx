@@ -106,7 +106,7 @@ const Barside = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to="/dashboard"
               icon={<DashboardOutlinedIcon />}
               selected={selected}
               setselected={setSelected}

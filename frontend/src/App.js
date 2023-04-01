@@ -22,7 +22,7 @@ function App() {
             <main className="content">
               <Topbar />
               <Routes>
-                <Route exact path="/" element={<Login />} />
+                {/* <Route exact path="/" element={<Login />} /> */}
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/transaksi" element={<Transaksi />} />
                 <Route path="/penukaran" element={<Penukaran />} />

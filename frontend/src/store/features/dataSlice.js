@@ -7,7 +7,7 @@ export const getData = createAsyncThunk(
   async (arg, { rejectWithValue }) => {
     try {
       const { data } = await axios.get("http://localhost:3001/showBooking");
-      // console.log(data);
+      console.log(data);
       return data;
     } catch (error) {
       rejectWithValue(error.response.data);
@@ -39,6 +39,7 @@ export const getData = createAsyncThunk(
 
 //Edit Data
 export const editData = createAsyncThunk('site/update', async (param, thunkAPI) => {
+  console.log(param);
   const requestoptions = {
     method: 'PUT',
     headers: {
@@ -50,8 +51,8 @@ export const editData = createAsyncThunk('site/update', async (param, thunkAPI) 
     },
     body: JSON.stringify(param.data)
   };
-  let response = await fetch ("http://localhost:3001/updateTiket/"+param.data.id, requestoptions);
-  console.log(param.data.id);
+  let response = await fetch ("http://localhost:3001/updateBooking/"+param.data.id_ticket, requestoptions);
+  console.log(response);
   if(response.status === 200){
     thunkAPI.dispatch(getData(param))
   }
