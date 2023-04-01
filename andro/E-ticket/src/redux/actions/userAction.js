@@ -39,25 +39,40 @@ export const initLogin = createAsyncThunk(
 
 export const fetchLogin = createAsyncThunk(
     'user/fetchLogin',
-    async ({ userName, userPass }, thunkAPI) => {
+    async ({ email, password }, thunkAPI) => {
         try {
-            if (userName.trim() === "fest" && userPass.trim() === "123") {
+            const response = await fetch(
+                'http://10.0.2.2:3001/loginUser',{
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email.trim(),
+                        password: password.trim(),
+                    }),
+                }
+            );
+
+            if (response.status === 200) {
+                const json = await response.json();
                 let profile = {
-                    userName: userName.trim(),
-                    userPass: userPass.trim(),
+                    email: email.trim(),
+                    password: password.trim(),
                     id: 1,
-                    member_name: "Telkom Property",
-                    member_address: "Bandung",
-                    member_profil: null,
-                    member_email: "telkomproperty@telkom.id",
-                    member_nip: "1234567890",
-                    member_phone: "081211122234",
-                    member_role: "Teknisi",
-                    member_gender: "L",
-                    member_jabatan: "Teknisi",
-                    status_martial: "Married",
-                    blood_type: "B",
-                    token: "-",
+                    member_name: "-",
+                    member_address: "-",
+                    member_profil: '-',
+                    member_email: "-",
+                    member_nip: "-",
+                    member_phone: "-",
+                    member_role: "-",
+                    member_gender: "-",
+                    member_jabatan: "-",
+                    status_martial: "-",
+                    blood_type: "-",
+                    token: json.token,
                 };
                 await AsyncStorage.setItem('profileAsync', JSON.stringify(profile));
                 return profile

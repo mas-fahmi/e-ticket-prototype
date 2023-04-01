@@ -14,15 +14,15 @@ import { ROUTES } from '../../navigations';
 export default function FormLogin() {
     const navigation = useNavigation()
     const [isShowPass, setIsShowPass] = useState(true)
-    const [userName, setUserName] = useState('')
-    const [userPass, setUserPass] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const { isLoading, dataProfile } = useSelector(state => state.user)
     const { isInformation, alertMessage } = useSelector(state => state.alert)
     const dispatch = useDispatch()
 
     const onPressSignIn = () => {
-        dispatch(fetchLogin({ userName, userPass }))
+        dispatch(fetchLogin({ email, password }))
     }
 
     useEffect(() => {
@@ -36,11 +36,11 @@ export default function FormLogin() {
             <ModalLoader isLoading={isLoading} />
             <Text style={[textStyles.textBold20, { color: GlobalColors.BGCOLOR2 }]}>Login</Text>
             <InputText
-                title='User Name'
+                title='Email'
                 textInputConfig={{
-                    placeholder: 'Enter your user name',
-                    value: userName,
-                    onChangeText: (text) => setUserName(text),
+                    placeholder: 'Enter your Email',
+                    value: email,
+                    onChangeText: (text) => setEmail(text),
                     returnKeyType: "next",
                     onSubmitEditing: () => this.passwordInput.focus()
                 }}
@@ -52,8 +52,8 @@ export default function FormLogin() {
                 textInputConfig={{
                     placeholder: 'Enter your password',
                     secureTextEntry: isShowPass,
-                    value: userPass,
-                    onChangeText: (text) => setUserPass(text),
+                    value: password,
+                    onChangeText: (text) => setPassword(text),
                     returnKeyType: "go",
                     onSubmitEditing: onPressSignIn,
                     ref: (input) => (this.passwordInput = input)

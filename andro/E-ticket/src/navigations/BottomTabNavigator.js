@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Iconn from 'react-native-vector-icons/Ionicons';
-import { Dashboard } from '../screens';
+import { DashHeader } from '../screens';
 import { ROUTES } from './index';
 import { GlobalColors, GlobalWidths } from '../constants/Styles';
 import { CustomTabBottom } from '.'
@@ -17,7 +17,7 @@ const svgCenter = (GlobalWidths[100] / 2) - 50
 function BottomTabNavigator() {
     return (
         <Tab.Navigator
-            initialRouteName={ROUTES.DASHBOARD}
+            initialRouteName={ROUTES.DASHHeader}
             tabBar={(props) => <CustomTabBar {...props} />}
             screenOptions={() => ({
                 headerShown: false,
@@ -28,8 +28,8 @@ function BottomTabNavigator() {
                 component={Map}
             />
             <Tab.Screen
-                name={ROUTES.DASHBOARD}
-                component={Dashboard}
+                name={ROUTES.DASHHeader}
+                component={DashHeader}
             />
             <Tab.Screen
                 name={ROUTES.TICKET}
@@ -73,9 +73,9 @@ const CustomTabBar = props => {
 }
 
 const TabBarComponent = ({ onPress, route, active }) => {
-    const bgColor = route.name === ROUTES.DASHBOARD ? 'rgba(253, 218, 206, 0.3)' : '#fddace'
+    const bgColor = route.name === ROUTES.DASHHeader ? 'rgba(253, 218, 206, 0.3)' : '#fddace'
     let tabSty = null
-    if (route.name === ROUTES.DASHBOARD) tabSty = { width: 100 }
+    if (route.name === ROUTES.DASHHeader) tabSty = { width: 100 }
     else tabSty = { flex: 1 }
 
     return (
@@ -95,7 +95,7 @@ const IconTabBar = ({ routeName, active, onPress }) => {
             </TouchableOpacity>
         )
     }
-    else if (routeName === ROUTES.DASHBOARD) {
+    else if (routeName === ROUTES.DASHHeader) {
         return (
             <CustomTabBottom onPress={onPress} selected={active} />
         )

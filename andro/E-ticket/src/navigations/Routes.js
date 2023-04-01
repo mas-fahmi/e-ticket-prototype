@@ -1,6 +1,6 @@
 export default {
     TABSCREEN: 'TabScreen',
-    DASHBOARD: 'DashboardScreen',
+    DASHHeader: 'DashHeaderScreen',
     LOGIN: 'LoginScreen',
     REGISTER: 'RegisterScreen',
     TICKET: 'TicketScreen',

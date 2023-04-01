@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { GlobalColors, GlobalFont, GlobalFontSizes } from './Styles';
 
-const colorText = GlobalColors.TEXT_PRIMARY
+const colorText = GlobalColors.TEXT_SECONDARY
 const reguler = GlobalFont.Gotham.reguler
 const medium = GlobalFont.Gotham.medium
 const mediumItalic = GlobalFont.Gotham.mdItalic
@@ -69,9 +69,9 @@ const textStyles = StyleSheet.create({
     textBold15: { fontSize: GlobalFontSizes[15], fontFamily: bold, color: colorText },
     textBold16: { fontSize: GlobalFontSizes[16], fontFamily: bold, color: colorText },
     textBold17: { fontSize: GlobalFontSizes[17], fontFamily: bold, color: colorText },
-    textBold18: { fontSize: GlobalFontSizes[18], fontFamily: bold, color: colorText },
+    textBold18: { fontSize: GlobalFontSizes[18], fontFamily: bold, color: '#eeeeee' },
     textBold19: { fontSize: GlobalFontSizes[19], fontFamily: bold, color: colorText },
-    textBold20: { fontSize: GlobalFontSizes[20], fontFamily: bold, color: colorText },
+    textBold20: { fontSize: GlobalFontSizes[20], fontFamily: bold, color: '#eeeeee' },
     textBold21: { fontSize: GlobalFontSizes[21], fontFamily: bold, color: colorText },
     textBold22: { fontSize: GlobalFontSizes[22], fontFamily: bold, color: colorText },
     textBold23: { fontSize: GlobalFontSizes[23], fontFamily: bold, color: colorText },

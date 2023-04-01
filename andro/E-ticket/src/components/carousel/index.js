@@ -12,6 +12,6 @@ export default function Carousel({ data, autoPlay }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     }
 })

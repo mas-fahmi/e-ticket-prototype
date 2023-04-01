@@ -16,7 +16,7 @@ export const GlobalColors = {
     logos: "#121527",
     navIcon: "#121527",
     TEXT_PRIMARY: "#FFFFFF",
-    TEXT_SECONDARY: "#a7a8a8",
+    TEXT_SECONDARY: "#444444",
     TEXT_TERTIARY: "#000000",
     BGCOLOR1: "#F8FAFD",
     BGCOLOR2: "#e42313",
