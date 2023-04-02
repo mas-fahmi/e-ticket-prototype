@@ -1,6 +1,5 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import { GlobalColors } from '../../constants/Styles';
 import { InputText, ButtonText, ModalLoader, ModalInformation } from '../../components';
 import textStyles from '../../constants/TextStyles';
@@ -8,7 +7,8 @@ import textStyles from '../../constants/TextStyles';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchLogin } from '../../redux/actions/userAction';
 import { closeModal } from '../../redux/reducers/alertSlice';
-import { Register } from '../register/register';
+//Navigation
+import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../navigations';
 
 export default function FormLogin() {
@@ -72,7 +72,7 @@ export default function FormLogin() {
             </View>
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end' }}>
                 <Text style={[textStyles.textMd12, { color: GlobalColors.TEXT_SECONDARY }]}>Don't have an account? </Text>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={() => navigation.navigate(ROUTES.REGISTER)} >
                     <Text style={[textStyles.textBold12, { color: GlobalColors.BGCOLOR2 }]}>Sign Up</Text>
                 </TouchableOpacity>
             </View>

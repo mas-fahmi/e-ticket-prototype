@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     },
     buttonOuterContainer: {
         borderRadius: 6,
-        marginVertical: 10,
+        marginVertical: 15,
         marginHorizontal: 5,
         overflow: 'hidden'
     },

@@ -45,7 +45,7 @@ export default function ImageCarousel({ data, autoPlay, pagination }) {
                     _offSet = Math.floor(_offSet + SIZE);
                 }
                 scrollViewRef.current.scrollTo({ x: _offSet, y: 0 });
-            }, 6000);
+            }, 2000);
         } else {
             clearInterval(interval.current);
         }

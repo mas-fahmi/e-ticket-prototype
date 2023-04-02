@@ -1,33 +1,22 @@
-import { StyleSheet, Text, View, TouchableOpacity,StatusBar, Image, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native';
 import React, { useEffect } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { ButtonText, ProfileImage, ContainerView, ModalLoader} from '../../components';
+import { ProfileImage, ContainerView, ModalLoader} from '../../components';
 import { GlobalColors, GlobalHeights, GlobalWidths, kDefaultPadding } from '../../constants/Styles';
 import { fetchLogout } from '../../redux/actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import textStyles from '../../constants/TextStyles';
 import Dashboard from './Dashboard';
-//Navigation
-import { useNavigation } from '@react-navigation/native';
-import { ROUTES } from '../../navigations';
 
 export default function DashHeader() {
     const dispatch = useDispatch()
-    const navigation = useNavigation()
-    const { dataProfile, isLoading } = useSelector(state => state.user)
-    
-    useEffect(() => {
-        if (dataProfile === null) {
-            navigation.navigate(ROUTES.LOGIN)
-        }
-    }, [dataProfile])
+    const { isLoading } = useSelector(state => state.user)
 
     const logout = () => {
         dispatch(fetchLogout())
     }
     return (
         <ContainerView>
-            <ScrollView>
             <ModalLoader isLoading={isLoading} />
                 <StatusBar hidden={true} />
                     <View style={styles.header}>
@@ -44,7 +33,6 @@ export default function DashHeader() {
                     <View style={styles.Dashboard}>
                         <Dashboard />
                     </View>
-            </ScrollView>
             </ContainerView>
         
     )
@@ -55,7 +43,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: kDefaultPadding,
-        backgroundColor: '#121527',
+        backgroundColor: '#181d3c',
+        borderBottomLeftRadius: GlobalHeights[5],
+        borderBottomRightRadius: GlobalHeights[5],
     },
     setting: {
         width: GlobalWidths[10],

@@ -8,8 +8,8 @@ import { ROUTES } from './index';
 import { GlobalColors, GlobalWidths } from '../constants/Styles';
 import { CustomTabBottom } from '.'
 import { Svg, Path } from 'react-native-svg';
-import Ticket from '../screens/dashboard/Ticket';
-import Map from '../screens/dashboard/Map';
+import Ticket from '../screens/dashboard/MyTicket/Ticket';
+import Map from '../screens/dashboard/maps/Map';
 
 const Tab = createBottomTabNavigator();
 const svgCenter = (GlobalWidths[100] / 2) - 50
