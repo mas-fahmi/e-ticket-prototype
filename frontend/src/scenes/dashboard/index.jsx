@@ -6,7 +6,7 @@ const Dashboard = () => {
     return (
         <Box m="20px">
             <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Header title="DASHBOARD" subtitle="Welcome to Dashboard"/>
+                <Header title="DASHBOARD" subtitle="Welcome to E-Ticket Anda telah berhasil login"/>
             </Box>
         </Box>    
     )

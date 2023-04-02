@@ -37,9 +37,6 @@ const Topbar = () => {
             )}
         </IconButton>
         <IconButton>
-            <SettingsOutlinedIcon/>
-        </IconButton>
-        <IconButton>
             <LogoutOutlinedIcon/>
         </IconButton>
       </Box>
