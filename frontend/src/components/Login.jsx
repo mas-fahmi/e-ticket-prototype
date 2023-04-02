@@ -45,8 +45,8 @@ function Login() {
 //     navigate("/dashboard")
 //   }
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="auth-form-container">
+      <h1>Login</h1>
       <div>
         <form onSubmit={Auth}>
             <p>{msg}</p>

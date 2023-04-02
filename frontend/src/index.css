@@ -45,6 +45,7 @@ body,
 .auth-form-container, .login-form{
   display: flex;
   flex-direction: column;
+  margin-top: 145px;
 }
 
 .auth-form-container label{
@@ -61,6 +62,7 @@ body,
 .auth-form-container button{
   border: none;
   background-color: white;
+  width: 100px;
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
