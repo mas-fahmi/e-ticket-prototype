@@ -33,3 +33,35 @@ body,
 ::-webkit-scrollbar-track:hover{
   background: #555;
 }
+
+.app .auth-form-container{
+  text-align: center;
+  display: flex;
+  min-height:50vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-form-container, .login-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form-container label{
+  text-align: left;
+  padding: 0.25 rem 0;
+}
+
+.auth-form-container input{
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.auth-form-container button{
+  border: none;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
