@@ -15,60 +15,70 @@ export const getData = createAsyncThunk(
   }
 );
 
-// export const editData = createAsyncThunk(
-//   "payload/edit",
-//   async (data, thunkAPI) => {
-//     console.log(data);
-//     const response = await fetch(
-//       "http://localhost:3001/updateTiket/:id_ticket=${id_ticket}",
-//       {
-//         method: "PUT",
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: "Bearer " + data.token,
-//         },
-//         body: JSON.stringify(data.data),
-//       }
-//     );
-//     if (response.status === 200) {
-//       thunkAPI.dispatch(getData(data));
-//     } else {
-//     }
-//   }
-// );
-
-//Edit Data
-export const editData = createAsyncThunk('site/update', async (param, thunkAPI) => {
-  console.log(param);
-  const requestoptions = {
-    method: 'PUT',
-    headers: {
-      Authorization: 'Bearer' + param.token,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': 'true',
-    },
-    body: JSON.stringify(param.data)
-  };
-  let response = await fetch ("http://localhost:3001/updateBooking/"+param.data.id_ticket, requestoptions);
-  console.log(response);
-  if(response.status === 200){
-    thunkAPI.dispatch(getData(param))
+//Edit Data Booking
+export const editData = createAsyncThunk(
+  "site/update",
+  async (param, thunkAPI) => {
+    console.log(param);
+    const requestoptions = {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer" + param.token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+      },
+      body: JSON.stringify(param.data),
+    };
+    let response = await fetch(
+      "http://localhost:3001/updateBooking/" + param.data.id_ticket,
+      requestoptions
+    );
+    console.log(response);
+    if (response.status === 200) {
+      thunkAPI.dispatch(getData(param));
+    }
   }
-})
-
+);
 
 //Get Data Penukaran Tiket
 export const getDataTiket = createAsyncThunk(
-  "posts/getData",
+  "posts/getDataTiket",
   async (arg, { rejectWithValue }) => {
     try {
       const { data } = await axios.get("http://localhost:3001/showTiket");
-      // console.log(data);
+      console.log(data);
       return data;
     } catch (error) {
       rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//Edit Data Ticket
+export const editDataTiket = createAsyncThunk(
+  "site/update",
+  async (param, thunkAPI) => {
+    console.log(param);
+    const requestoptions = {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer" + param.token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+      },
+      body: JSON.stringify(param.data),
+    };
+    let response = await fetch(
+      "http://localhost:3001/updateTiket/" + param.data.id_ticket,
+      requestoptions
+    );
+    console.log(response);
+    if (response.status === 200) {
+      thunkAPI.dispatch(getData(param));
     }
   }
 );
@@ -111,12 +121,14 @@ const dataSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = false;
     },
-
     [editData.fulfilled]: (state, { payload }) => {
       state.data = payload;
       // console.log(payload);
     },
-
+    [editDataTiket.fulfilled]: (state, { payload }) => {
+      state.data = payload;
+      console.log(payload);
+    },
   },
 });
 

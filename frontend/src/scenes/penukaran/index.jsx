@@ -1,10 +1,18 @@
-import { Box, useTheme } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import {
+  Box,
+  Button,
+  IconButton,
+  InputBase,
+  useTheme,
+} from "@mui/material";
 import { tokens } from "../../theme";
-import Header from "../../components/Header";
-import { getDataTiket } from "../../store/features/dataSlice";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import Header from "../../components/Header";
+import { getData, getDataTiket } from "../../store/features/dataSlice";
+import ModalComponent from "./Modal";
+import DataTable from "react-data-table-component";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Penukaran = () => {
   const theme = useTheme();
@@ -12,88 +20,142 @@ const Penukaran = () => {
 
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.data);
+  const [isEdit, setIsEdit] = useState(false);
+  const [row, setRow] = useState();
+
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  // console.log(query);
 
   useEffect(() => {
     dispatch(getDataTiket());
   }, []);
 
+  useEffect(() => {}, [search]);
   const columns = [
-    { field: "id", headername: "ID", flex: 0.5 },
     {
-      field: "id_ticket",
-      headername: "Id_Ticket",
-      flex: 1,
-      cellClassName: "name-column--cell",
+      name: "Id",
+      selector: (row) => row.id,
     },
     {
-      field: "nik",
-      headername: "Nik",
-      flex: 1,
+      name: "Id_Ticket",
+      selector: (row) => row.id_ticket,
+      style: {
+        color: colors.greenAccent[300],
+      },
     },
     {
-      field: "name",
-      headername: "Nama",
-      flex: 1,
+      name: "nik",
+      selector: (row) => row.nik,
     },
     {
-      field: "email",
-      headername: "Email",
-      flex: 1,
+      name: "nama",
+      selector: (row) => row.name,
+      style: {
+        color: colors.greenAccent[300],
+      },
     },
     {
-      field: "verification",
-      headername: "Verifikasi",
-      flex: 1,
+      name: "Email",
+      selector: (row) => row.email,
+    },
+    {
+      name: "Verification",
+      selector: (row) => row.verification,
+      sortable: true,
+    },
+    {
+      name: "Action",
+      cell: (row) => (
+        <Button
+          color="info"
+          onClick={() => {
+            setIsEdit(true);
+            setRow(row);
+          }}
+        >
+          EDit
+        </Button>
+      ),
     },
   ];
+  var x = 1;
+  const datas = data.map((item) => {
+      return {
+        id: x++,
+        id_ticket: item.id_ticket,
+        nik: item.nik,
+        name: item.name,
+        email: item.email,
+        verification: item.verification,
+        action: item,
+      };
+    });
 
-  const rows = data.map((item) => ({
-    id: item.id,
-    id_ticket: item.id_ticket,
-    nik: item.nik,
-    name: item.name,
-    email: item.email,
-    payments: item.verification,
-  }));
+  const customStyle = {
+    rows: {
+      style: {
+        // fontSize: "10px",
+        padding: "5px",
+        fontWeight: "bold",
+        backgroundColor: colors.primary[500],
+      },
+    },
+    headCells: {
+      style: {
+        fontSize: "15px",
+        fontWeight: "bold",
+        backgroundColor: colors.blueAccent[800],
+        padding: "5px",
+      },
+    },
+    pagination: {
+      style: {
+        backgroundColor: colors.blueAccent[800],
+      },
+    },
+  };
 
+  const searchs = (data) => {
+    return data.filter(
+      (item) =>
+        item.id_ticket.toLowerCase().includes(query) ||
+        item.name.toLowerCase().includes(query)
+    );
+  };
   return (
     <Box m="20px">
-      <Header title="Penukaran" subtitle="Manage Penukaran" />
-      <Box
-        m="auto 7% 0 0"
-        height="75vh"
-        sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
-          },
-          "& .name-column--cell": {
-            color: colors.greenAccent[300],
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[800],
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[500],
-          },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor: colors.blueAccent[800],
-          },
-          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-            color: `${colors.grey[100]} !important`,
-          },
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          components={{ Toolbar: GridToolbar }}
-        />
+      <Header title="Transaksi" subtitle="Manage Transaksi" />
+      <Box display="flex" justifyContent="flex-end" margin="auto">
+        <Box
+          display="flex"
+          backgroundcolor={colors.primary[400]}
+          borderRadius="3px"
+        >
+          <InputBase
+            sx={{ ml: 2, flex: 1 }}
+            placeholder="Search"
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <IconButton type="button" sx={{ p: 1 }}>
+            <SearchIcon />
+          </IconButton>
+        </Box>
       </Box>
+      <DataTable
+        columns={columns}
+        data={searchs(datas)}
+        pagination
+        highlightOnHover
+        pointerOnHover
+        fixedHeader
+        fixedHeaderScrollHeight="350px"
+        theme={2 === 1 ? "dark" : "dark"}
+        customStyles={customStyle}
+      />
+      {isEdit ? (
+        <ModalComponent closeModal={setIsEdit} isEdit={isEdit} row={row} />
+      ) : null}
     </Box>
   );
 };

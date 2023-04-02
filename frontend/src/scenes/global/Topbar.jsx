@@ -7,12 +7,22 @@ import SettingsOutlinedIcon from "@mui/icons-material/Settings";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import SearchIcon from "@mui/icons-material/Search";
 import { ColorModeContext, tokens } from "../../theme";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-
+  const navigate = useNavigate();
+  const Logout = async() =>{
+    try{
+      await axios.delete('http://localhost:3001/logoutAdmin');
+      navigate("/")
+    }catch (error){
+      console.log(error);
+    }
+  }
   return (
     <Box display="flex" justifyContent="space-between" p={2} margin="auto">
       {/* SearchBar */}
@@ -36,10 +46,7 @@ const Topbar = () => {
                 <LightModeOutlinedIcon/>
             )}
         </IconButton>
-        <IconButton>
-            <SettingsOutlinedIcon/>
-        </IconButton>
-        <IconButton>
+        <IconButton onClick={Logout}>
             <LogoutOutlinedIcon/>
         </IconButton>
       </Box>

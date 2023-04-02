@@ -2,8 +2,8 @@ import { Button, TextField, Typography, Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { editData } from "../../store/features/dataSlice";
-import "./transaksi.css";
+import { editData, editDataTiket } from "../../store/features/dataSlice";
+import "./penukaran.css";
 
 const style = {
   position: "absolute",
@@ -35,7 +35,7 @@ const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
     let dataval = row;
     param.data = dataval;
     param.data.verification = verification;
-    dispatch(editData(param));
+    dispatch(editDataTiket(param));
   };
 
   return (
