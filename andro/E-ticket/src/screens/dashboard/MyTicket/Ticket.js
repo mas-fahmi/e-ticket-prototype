@@ -9,91 +9,46 @@ import { ROUTES } from '../../../navigations';
 //Redux 
 import { useDispatch, useSelector } from 'react-redux';
 import { GlobalColors } from '../../../constants/Styles';
-import { TextInput } from 'react-native-gesture-handler';
 
-const Item = ({nik, name, email, fest_name, payments}) => {
+const Item = ({fest_name, name, id_ticket, payments}) => {
     return (
         <View style={styles.itemContainer}>
-            <Text style={styles.itemContainer}>{nik}</Text>
-            <Text style={styles.itemContainer}>{name}</Text>
-            <Text style={styles.itemContainer}>{email}</Text>
             <Text style={styles.itemContainer}>{fest_name}</Text>
+            <Text style={styles.itemContainer}>SMK Negeri 1 Cimahi</Text>
+            <Text style={styles.itemContainer}>{name}</Text>
+            <Text style={styles.itemContainer}>{id_ticket}</Text>
             <Text style={styles.itemContainer}>{payments}</Text>
             <Text style={styles.delete}>X</Text>
         </View>
     )
 }
 
-export default function Ticket() {
-    
-    const navigation = useNavigation()
-    const { dataProfile, isLoading } = useSelector(state => state.user)
-    const dispatch = useDispatch()
+export default function Ticket() {    
 
-    useEffect(() => {
-        if (dataProfile === null) {
-            navigation.navigate(ROUTES.LOGIN)
-        }
-    }, [dataProfile])
-    
-    const [nik, setNik] = useState("");
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [fest_name, setFestName] = useState("");
-    const [payments, setPayments] = useState("");
-    const [payloads, setPayload] = useState([])
+    const [payloads, setPayloads] = useState([]);
 
     useEffect(() => {
         getData();  
     }, []);
-
-    const submit = () => {
-        const data = {
-            nik,
-            name,
-            email,
-            fest_name,
-            payments
-        }
-        axios.post('http://10.0.2.2:3001/addBooking', data)
-        .then(res => {
-            console.log('res : ', res);
-            setNik("");
-            setName("");
-            setEmail("");
-            setFestName("");
-            setPayments("");
-            getData("");
-        })
-    }
+    
 
     const getData = () => {
         axios.get('http://10.0.2.2:3001/showBooking')
         .then(res => {
             console.log('res get data: ', res);
-            setPayload(res.data)
+            setPayloads(res.payload)
         })
     }
     return (
         <ContainerView>
-            <ModalLoader isLoading={isLoading} />
             <ScrollView contentContainerStyle={{ paddingBottom: 80 }} showsVerticalScrollIndicator={false}>
                 <StatusBar hidden={true} />
                 <Text style={[textStyles.textBold15, GlobalColors.white, { marginBottom: 20, marginTop: 50, textAlign: 'center' }]}>Ini Ticket Screen</Text>
-                <View style={styles.container}>
-                    <Text style={styles.textTitle}>Local Api (JSON SERVER)</Text>
-                    <Text style={{color: 'white'}}>Masukan Data User</Text>
-                    <TextInput placeholder='NIK' style={styles.input} value={nik} onChangeText={(value) => setNik(value)}/>
-                    <TextInput placeholder='Name'  style={styles.input} value={name} onChangeText={(value) => setName(value)}/>
-                    <TextInput placeholder='Email'  style={styles.input} value={email} onChangeText={(value) => setEmail(value)}/>
-                    <TextInput placeholder='Fest_Name'  style={styles.input} value={fest_name} onChangeText={(value) => setFestName(value)}/>
-                    <TextInput placeholder='Payments'  style={styles.input} value={payments} onChangeText={(value) => setPayments(value)}/>
-                    <Button title='Simpan' onPress={submit}/>
-                    <View style={styles.line}/>
-                        {payloads.map(payload => {
-                            return <Item nik={payload.nik} name={payload.name} email={payload.email} fest_name={payload.fest_name} payments={payload.payments}/>
-                        })}
-                </View>
+                {payloads.map(user => {
+                    return <Item key={user.id} fest_name={user.fest_name} name={user.name} id_ticket={user.id_ticket} payments={user.payments}/>
+                    
+        } )}
+
             </ScrollView>
         </ContainerView>
     )

@@ -16,12 +16,6 @@ export default function Booking() {
     const navigation = useNavigation()
     const { dataProfile, isLoading } = useSelector(state => state.user)
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        if (dataProfile === null) {
-            navigation.navigate(ROUTES.LOGIN)
-        }
-    }, [dataProfile])
     
     const [nik, setNik] = useState("");
     const [name, setName] = useState("");
