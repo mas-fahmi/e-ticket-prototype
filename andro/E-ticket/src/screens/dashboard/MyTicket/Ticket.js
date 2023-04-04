@@ -32,22 +32,28 @@ export default function Ticket() {
     }, []);
     
 
-    const getData = () => {
-        axios.get('http://10.0.2.2:3001/showBooking')
-        .then(res => {
-            console.log('res get data: ', res);
-            setPayloads(res.payload)
-        })
+    const getData = async () => {
+        // axios.get('http://10.200.0.183:3001/showBooking')
+        // .then(res => {
+        //     console.log('res get data: ', res);
+        //     setPayloads(res.payload)
+        //     console.log(res[0].payload)
+        // })
+
+        const response = await fetch('http://10.200.0.183:3001/showBooking', { method: 'GET' });
+        const responseJson = await response.json();
+        setPayloads(responseJson[0].payload)
+        // console.log(responseJson[0].payload)
+
     }
     return (
         <ContainerView>
             <ScrollView contentContainerStyle={{ paddingBottom: 80 }} showsVerticalScrollIndicator={false}>
                 <StatusBar hidden={true} />
                 <Text style={[textStyles.textBold15, GlobalColors.white, { marginBottom: 20, marginTop: 50, textAlign: 'center' }]}>Ini Ticket Screen</Text>
-                {payloads.map(user => {
-                    return <Item key={user.id} fest_name={user.fest_name} name={user.name} id_ticket={user.id_ticket} payments={user.payments}/>
-                    
-        } )}
+                {payloads.map((data,index) => 
+                    <Item key={data.id} fest_name={data.fest_name} name={data.name} id_ticket={data.id_ticket} payments={data.payments}/>
+                )}
 
             </ScrollView>
         </ContainerView>

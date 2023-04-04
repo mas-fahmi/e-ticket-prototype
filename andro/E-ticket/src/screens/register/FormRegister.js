@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import textStyles from '../../constants/TextStyles';
 import { GlobalColors } from '../../constants/Styles';
-import { ModalLoader } from '../../components';
+import { InputText, ButtonText, ModalLoader, ModalInformation } from '../../components';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
 //Navigation
@@ -14,8 +14,15 @@ import { TextInput } from 'react-native-gesture-handler';
 export default function FormRegister() {
 
     const navigation = useNavigation()
+    const [isShowPass, setIsShowPass] = useState(true)
+    const { isInformation, alertMessage } = useSelector(state => state.alert)
     const { isLoading, dataProfile } = useSelector(state => state.user)
     const dispatch = useDispatch()   
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confPassword, setconfPassword] = useState("")
 
     useEffect(() => {
         if (dataProfile !== null) {
@@ -23,10 +30,7 @@ export default function FormRegister() {
         } 
     }, [dataProfile])
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [confPassword, setconfPassword] = useState("")
+    
 
     const submit = () => {
         const data = {
@@ -35,7 +39,7 @@ export default function FormRegister() {
             password,
             confPassword
         }
-        axios.post('http://10.0.2.2:3001/registerUser', data)
+        axios.post('http://10.200.0.1:3001/registerUser', data)
         .then(res => {
             console.log('res : ', res);
             setName("");
@@ -50,21 +54,59 @@ export default function FormRegister() {
             <StatusBar hidden={true} />
             <Text style={[textStyles.textBold20, { color: GlobalColors.BGCOLOR2 }]}>Register</Text>
             
-            <View style={styles.container}>
-                    <Text style={{color: 'white'}}>Masukan Data User</Text>
-                    <TextInput placeholder='Name'  style={styles.input} value={name} onChangeText={(value) => setName(value)}/>
-                    <TextInput placeholder='Email'  style={styles.input} value={email} onChangeText={(value) => setEmail(value)}/>
-                    <TextInput placeholder='password'  style={styles.input} value={password} onChangeText={(value) => setPassword(value)}/>
-                    <TextInput placeholder='Confirm password'  style={styles.input} value={confPassword} onChangeText={(value) => setconfPassword(value)}/>
-                    <Button title='Simpan' onPress={submit}/>
+                <View>
+                    <InputText 
+                        title='Name'
+                        textInputConfig={{
+                            placeholder: 'Enter your Name',
+                            value: {name},
+                            onChangeText: (value) => setName(value),
+                        }}/>
+                    <InputText 
+                        title='Email'
+                        textInputConfig={{
+                            placeholder: 'Email',
+                            value: {email},
+                            onChangeText: (value) => setEmail(value),
+                        }}/>
+                    <InputText 
+                        title='password'
+                        rightIcon={isShowPass ? 'eye' : 'eye-off'}
+                        onPressIcon={() => setIsShowPass(!isShowPass)}
+                        textInputConfig={{
+                            placeholder: 'Password',
+                            secureTextEntry: isShowPass,
+                            value: {password},
+                            onChangeText: (value) => setPassword(value),
+                        }}/>
+                    <InputText 
+                        title='Password'
+                        rightIcon={isShowPass ? 'eye' : 'eye-off'}
+                        onPressIcon={() => setIsShowPass(!isShowPass)}
+                        textInputConfig={{
+                            placeholder: 'Confirm Password',
+                            secureTextEntry: isShowPass,
+                            value: {confPassword},
+                            onChangeText: (value) => setconfPassword(value),
+                        }}/>
+                    <View style={{ marginTop: 20 }}>
+                        <ButtonText onPress={submit}>
+                            Sign Up
+                        </ButtonText>
+                    </View>
                 </View>
+                <ModalInformation
+                showModal={isInformation}
+                message={alertMessage}
+                onPressSubmitOk={() => dispatch(closeModal("Information"))}
+                onRequestClose={() => dispatch(closeModal("Information"))}
+            />
         </>
             
     )
 }
 
 const styles = StyleSheet.create({
-    container: {padding: 20, },
     input: {borderWidth: 1,marginBottom: 12, borderRadius:25, paddingHorizontal: 18, color: 'white', borderColor: 'white'},
 
 })

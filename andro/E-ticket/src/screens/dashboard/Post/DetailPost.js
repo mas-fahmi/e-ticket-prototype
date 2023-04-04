@@ -33,8 +33,8 @@ export default function DetailPost() {
         </View>
 
         <Text style={[textStyles.textBold15,{marginLeft: 20, marginTop: 25}]}>About</Text>
-        <Text style={[textStyles.text12, {marginLeft: 20, marginTop: 10, marginRight: 10}]}>Meghan Elizabeth Trainor is an American singer, songwriter and record producer, who wrote, recorded, performed and produced three independently released albums before she turned eighteen. A child prodigy, Trainor’s interest in singing and songwriting can be traced to her musically-inclined family; her father being her pillar of support.</Text>
-        <ButtonText onPress={() => navigation.navigate(ROUTES.BOOKING)}  >
+        <Text style={[textStyles.text15, {margin: 20}]}>Meghan Elizabeth Trainor is an American singer, songwriter and record producer, who wrote, recorded, performed and produced three independently released albums before she turned eighteen. A child prodigy, Trainor’s interest in singing and songwriting can be traced to her musically-inclined family; her father being her pillar of support.</Text>
+        <ButtonText onPress={() => navigation.navigate(ROUTES.BOOKING) }>
             Buy Ticket Now
         </ButtonText>
       </View>    

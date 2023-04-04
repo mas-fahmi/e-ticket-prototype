@@ -39,7 +39,7 @@ const textStyles = StyleSheet.create({
     textMd10: { fontSize: GlobalFontSizes[10], fontFamily: medium, color: colorText },
     textMd11: { fontSize: GlobalFontSizes[11], fontFamily: medium, color: colorText },
     textMd12: { fontSize: GlobalFontSizes[12], fontFamily: medium, color: colorText },
-    textMd13: { fontSize: GlobalFontSizes[13], fontFamily: medium, color: colorText },
+    textMd13: { fontSize: GlobalFontSizes[13], fontFamily: medium, color: '#000000' },
     textMd14: { fontSize: GlobalFontSizes[14], fontFamily: medium, color: '#ffffff' },
     textMd15: { fontSize: GlobalFontSizes[15], fontFamily: medium, color: colorText },
     textMd16: { fontSize: GlobalFontSizes[16], fontFamily: medium, color: colorText },

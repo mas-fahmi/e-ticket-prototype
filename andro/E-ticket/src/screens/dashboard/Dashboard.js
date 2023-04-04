@@ -13,8 +13,14 @@ import { ROUTES } from '../../navigations';
 
 export default function Dashboard() {
     const navigation = useNavigation()
-    
+    const { dataProfile, isLoading } = useSelector(state => state.user)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (dataProfile === null) {
+            navigation.navigate(ROUTES.LOGIN)
+        }
+    }, [dataProfile])
 
     return (
             <ScrollView contentContainerStyle={{ paddingBottom: 80 }} showsVerticalScrollIndicator={false}>
@@ -23,7 +29,7 @@ export default function Dashboard() {
                 <Text style={[textStyles.textBold18, { marginTop: 20, marginLeft: 20}]}>Today</Text> 
                         <View style={styles.container}>
                             <ScrollView horizontal>
-                                    <Image style={styles.container} source={GlobalImages.wakuFest} onProgress={() => {ROUTES.DETAILPOST}} />
+                                    <Image style={styles.container} source={GlobalImages.wakuFest}/>
                                     <View style={styles.descContainer}>
                                     <TouchableOpacity onPress={() => navigation.navigate(ROUTES.DETAILPOST)} >
                                         <Text style={[textStyles.textBold12, { color: '#ffffff',}]}>Waku Waktu</Text>

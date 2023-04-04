@@ -42,7 +42,7 @@ export const fetchLogin = createAsyncThunk(
     async ({ email, password }, thunkAPI) => {
         try {
             const response = await fetch(
-                'http://10.0.2.2:3001/loginUser',{
+                'http://10.200.0.183:3001/loginUser',{
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',

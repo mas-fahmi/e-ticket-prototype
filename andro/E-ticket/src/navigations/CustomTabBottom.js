@@ -20,8 +20,8 @@ const CustomTabBottom = ({ onPress, selected }) => {
     else {
         return (
             <TouchableOpacity onPress={onPress} >
-                <GradientView style={styles.container} colors={["#ffffff", GlobalColors.BUTTON1]}>
-                    <Icon name='home-outline' size={GlobalFontSizes[30]} color={GlobalColors.TEXT_PRIMARY} />
+                <GradientView style={styles.container} colors={[GlobalColors.BGCOLOR2, GlobalColors.navIcon]}>
+                    <Icon name='home' size={GlobalFontSizes[30]} color={GlobalColors.TEXT_PRIMARY} />
                 </GradientView>
             </TouchableOpacity>
         )

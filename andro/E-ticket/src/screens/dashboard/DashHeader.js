@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: kDefaultPadding,
-        backgroundColor: '#181d3c',
+        backgroundColor: '#537885',
         borderBottomLeftRadius: GlobalHeights[5],
         borderBottomRightRadius: GlobalHeights[5],
     },

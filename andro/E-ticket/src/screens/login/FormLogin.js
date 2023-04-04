@@ -46,7 +46,7 @@ export default function FormLogin() {
                 }}
             />
             <InputText
-                title='Password'
+                title='password'
                 rightIcon={isShowPass ? 'eye' : 'eye-off'}
                 onPressIcon={() => setIsShowPass(!isShowPass)}
                 textInputConfig={{

@@ -1,7 +1,7 @@
 import { StyleSheet, StatusBar, ScrollView, Text, View , Button } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {ContainerView, ModalLoader } from '../../../components';
+import {ContainerView, InputText, ModalLoader, ButtonText } from '../../../components';
 import textStyles from '../../../constants/TextStyles';
 //Navigation
 import { useNavigation } from '@react-navigation/native';
@@ -46,14 +46,46 @@ export default function Booking() {
             <ModalLoader isLoading={isLoading} />
             <ScrollView contentContainerStyle={{ paddingBottom: 80 }} showsVerticalScrollIndicator={false}>
                 <StatusBar hidden={true} />
-                <Text style={[textStyles.textBold15, GlobalColors.white, { marginBottom: 20, marginTop: 50, textAlign: 'center' }]}>Ini Ticket Screen</Text>
+                <Text style={[textStyles.textBold15, GlobalColors.white, { marginBottom: 20, marginTop: 50,marginLeft: 30 }]}>Detail pesanan</Text>
                 <View style={styles.container}>
-                    <TextInput placeholder='NIK' style={styles.input} value={nik} onChangeText={(value) => setNik(value)}/>
-                    <TextInput placeholder='Name'  style={styles.input} value={name} onChangeText={(value) => setName(value)}/>
-                    <TextInput placeholder='Email'  style={styles.input} value={email} onChangeText={(value) => setEmail(value)}/>
-                    <TextInput placeholder='Fest_Name'  style={styles.input} value={fest_name} onChangeText={(value) => setFestName(value)}/>
-                    <TextInput placeholder='Payments'  style={styles.input} value={payments} onChangeText={(value) => setPayments(value)}/>
-                    <Button title='Simpan' onPress={submit}/>
+                    <InputText 
+                        title='NIK'
+                        textInputConfig={{
+                            placeholder: 'Nik',
+                            value: {nik},
+                            onChangeText: (value) => setNik(value),
+                        }}/>
+                    <InputText 
+                        title='Name'
+                        textInputConfig={{
+                            placeholder: 'name',
+                            value: {name},
+                            onChangeText: (value) => setName(value),
+                        }}/>
+                    <InputText 
+                        title='Email'
+                        textInputConfig={{
+                            placeholder: 'Email',
+                            value: {email},
+                            onChangeText: (value) => setEmail(value),
+                        }}/>
+                    <InputText 
+                        title='Fest_Name'
+                        textInputConfig={{
+                            placeholder: 'FEST NAME',
+                            value: {fest_name},
+                            onChangeText: (value) => setFestName(value),
+                        }}/>
+                    <InputText 
+                        title='Payments'
+                        textInputConfig={{
+                            placeholder: 'Payments',
+                            value: {payments},
+                            onChangeText: (value) => setPayments(value),
+                        }}/>
+                    <ButtonText onPress={submit}>
+                        Order
+                    </ButtonText>
                 </View>
             </ScrollView>
         </ContainerView>
@@ -65,7 +97,7 @@ const styles = StyleSheet.create({
     textTitle: {textAlign: 'center'},
     line: {height: 2, backgroundColor: 'black', marginVertical: 20},
     avatar: {width: 100, height: 100, borderRadius: 100},
-    input: {borderWidth: 1,marginBottom: 12, borderRadius:25, paddingHorizontal: 18, color: 'white', borderColor: 'white'},
+    input: {borderWidth: 1,marginBottom: 12, borderRadius:10, paddingHorizontal: 18, color: 'white', borderColor: 'white'},
     delete: {fontSize: 20, fontWeight: 'bold', color: 'red',  marginBottom: 15},
     itemContainer: {color: 'white', fontSize: 18},
 
