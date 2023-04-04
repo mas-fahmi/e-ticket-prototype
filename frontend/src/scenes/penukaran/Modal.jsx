@@ -49,12 +49,12 @@ const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
         <Box sx={style}>
           <div className="title">
             <Typography variant="h5" color="light" align="center">
-              Verifikasi Pembayaran
+              Verifikasi Penukaran Tiket
             </Typography>
           </div>
           <div className="title">
             <Typography color="light" align="justify">
-              Verifikasi pembayaran berdasarkan data dari bukti transaksi.
+              Verifikasi Tiket yang telah ditukar.
             </Typography>
             <TextField
               label="Verification"
@@ -67,7 +67,7 @@ const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
             />
           </div>
           <div className="footer">
-            <Button color="success"  onClick={handleSave}>Telah Bayar</Button>
+            <Button color="success"  onClick={handleSave}>Telah Ditukar</Button>
           </div>
         </Box>
       </Modal>
