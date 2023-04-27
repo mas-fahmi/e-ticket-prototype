@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//Get Data Transaksi/Booking
+//Get Data Transaksi/Transaksi
 export const getData = createAsyncThunk(
   "posts/getData",
   async (arg, { rejectWithValue }) => {
@@ -15,7 +15,28 @@ export const getData = createAsyncThunk(
   }
 );
 
-//Edit Data Booking
+
+// add data
+export const postCluster = createAsyncThunk(
+  "cluster/post",
+  async (params, thunkAPI) => {
+    console.log(params);
+    const response = await fetch("http://localhost:3001/addTiket/" + params.data.id_ticket, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + params.token,
+      },
+      body: JSON.stringify(params.data),
+    });
+    if (response.status === 200) {
+      thunkAPI.dispatch(getData(params));
+    } else {
+    }
+  }
+);
+
+//Edit Data Transaksi
 export const editData = createAsyncThunk(
   "site/update",
   async (param, thunkAPI) => {
@@ -56,7 +77,7 @@ export const getDataTiket = createAsyncThunk(
   }
 );
 
-//Edit Data Ticket
+//Edit Data Penukaran
 export const editDataTiket = createAsyncThunk(
   "site/update",
   async (param, thunkAPI) => {

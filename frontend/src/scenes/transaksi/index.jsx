@@ -34,20 +34,20 @@ const Transaksi = () => {
   useEffect(() => {}, [search]);
   const columns = [
     {
-      name: "Id",
+      name: "No",
       selector: (row) => row.id,
     },
     {
-      name: "Id_Ticket",
+      name: "ID Penukaran",
       selector: (row) => row.id_ticket,
       style: {
         color: colors.greenAccent[300],
       },
     },
-    {
-      name: "nik",
-      selector: (row) => row.nik,
-    },
+    // {
+    //   name: "nik",
+    //   selector: (row) => row.nik,
+    // },
     {
       name: "nama",
       selector: (row) => row.name,
@@ -104,6 +104,8 @@ const Transaksi = () => {
         action: item,
       };
     });
+
+
 
   const customStyle = {
     rows: {

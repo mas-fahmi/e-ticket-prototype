@@ -2,7 +2,7 @@ import { Button, TextField, Typography, Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { editData } from "../../store/features/dataSlice";
+import { editData, postCluster } from "../../store/features/dataSlice";
 import "./transaksi.css";
 
 const style = {
@@ -36,7 +36,16 @@ const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
     param.data = dataval;
     param.data.verification = verification;
     dispatch(editData(param));
+    dispatch(postCluster(param))
   };
+
+  // const params = {};
+  // const handleSaves = async (event) => {
+  //   event.preventDefault();
+  //   let dataval = row;
+  //   params.data = dataval;
+  //   dispatch(postCluster(params));
+  // };
 
   return (
     <div>
@@ -68,6 +77,7 @@ const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
           </div>
           <div className="footer">
             <Button color="success"  onClick={handleSave}>Telah Bayar</Button>
+            {/* <Button color="success"  onClick={handleSaves}>Add</Button> */}
           </div>
         </Box>
       </Modal>
