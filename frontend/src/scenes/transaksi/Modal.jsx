@@ -40,7 +40,7 @@ const ModalComponent = ({ isEdit = false, id, closeModal, row }) => {
   };
 
   // const params = {};
-  // const handleSaves = async (event) => {
+  // const handleSaves = async (event) => {asdadasd
   //   event.preventDefault();
   //   let dataval = row;
   //   params.data = dataval;
