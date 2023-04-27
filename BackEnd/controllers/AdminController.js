@@ -59,7 +59,7 @@ exports.loginAdmin = async function(req, res){
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000
         });
-        res.json({accesToken})
+        res.json({accesToken, msg: "Login Succesfully!!"})
     } catch (error) {
         return res.json({msg: "Invalid Email!!"})
     }
@@ -81,5 +81,5 @@ exports.logoutAdmin = async function(req, res){
         }
     });
     res.clearCookie('refreshToken');
-    return res.sendStatus(200)
+    return res.json({msg: "Account Logout"})
 }
