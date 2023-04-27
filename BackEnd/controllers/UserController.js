@@ -59,7 +59,7 @@ exports.loginUsers = async function(req, res){
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000
         });
-        res.json({accesToken})
+        res.json({accesToken, msg: "Login Succesfully!!"})
     } catch (error) {
         return res.json({msg: "Invalid Email!!"})
     }
