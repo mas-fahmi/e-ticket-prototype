@@ -34,19 +34,15 @@ const Penukaran = () => {
   useEffect(() => {}, [search]);
   const columns = [
     {
-      name: "Id",
+      name: "No",
       selector: (row) => row.id,
     },
     {
-      name: "Id_Ticket",
+      name: "ID Penukaran",
       selector: (row) => row.id_ticket,
       style: {
         color: colors.greenAccent[300],
       },
-    },
-    {
-      name: "nik",
-      selector: (row) => row.nik,
     },
     {
       name: "nama",
@@ -55,10 +51,10 @@ const Penukaran = () => {
         color: colors.greenAccent[300],
       },
     },
-    {
-      name: "Email",
-      selector: (row) => row.email,
-    },
+    // {
+    //   name: "Email",
+    //   selector: (row) => row.email,
+    // },
     {
       name: "Verification",
       selector: (row) => row.verification,
@@ -125,7 +121,7 @@ const Penukaran = () => {
   };
   return (
     <Box m="20px">
-      <Header title="Transaksi" subtitle="Manage Transaksi" />
+      <Header title="Penukaran" subtitle="Manage Penukaran" />
       <Box display="flex" justifyContent="flex-end" margin="auto">
         <Box
           display="flex"
@@ -148,8 +144,8 @@ const Penukaran = () => {
         pagination
         highlightOnHover
         pointerOnHover
-        fixedHeader
-        fixedHeaderScrollHeight="350px"
+        // fixedHeader
+        // fixedHeaderScrollHeight="350px"
         theme={2 === 1 ? "dark" : "dark"}
         customStyles={customStyle}
       />
