@@ -61,7 +61,7 @@ exports.loginUsers = async function(req, res){
         });
         res.json({accesToken, msg: "Login Succesfully!!"})
     } catch (error) {
-        return res.json({msg: "Invalid Email!!"})
+        return res.status(400).json({msg: "Invalid Email!!"})
     }
 }
 
